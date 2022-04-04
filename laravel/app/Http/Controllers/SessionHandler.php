@@ -34,9 +34,11 @@ class SessionHandler extends Controller
             $userId = DB::select("select * from faculty where ACTIVESESSION=?", [Session::get("user")]);
             //Get the Educational bg
             $educationalBg = DB::select("select * from EDUCATIONALBACKGROUND where ID=?",[$userId[0]->ID]);
-            return view("information", ["education"=>$educationalBg]);
+            //Get Personal Info
+            $personalInfo = DB::select("select * from PERSONALINFO where ID=?", [$userId[0]->ID]);
+            return view("information", ["education"=>$educationalBg, "info"=>$personalInfo]);
         }else
-        return view("login");
+        return "<script>window.location.href='/logout'</script>";
     }
     public function toRegister(){
         if(Session::has("user"))
@@ -54,7 +56,10 @@ class SessionHandler extends Controller
             //Proceed with registration
             DB::statement("insert into faculty(USERNAME, PASSWORD) VALUES(?,?)", [$email, $pas1]);
             $id = DB::select("select * from faculty where USERNAME=?",[$email]);
+
+            //Make Educational Background, Personal Info
             DB::statement("insert into EDUCATIONALBACKGROUND(ID) values(?)", [$id[0]->ID]);
+            DB::statement("insert into PERSONALINFO(ID) values(?)", [$id[0]->ID]);
             return view("/register", ['msg'=>"Registered succesfully!"]);
         }else{
             //Return an error
@@ -65,10 +70,11 @@ class SessionHandler extends Controller
     public function logout(){
         DB::update("update faculty set ACTIVESESSION='' where ACTIVESESSION=?",[Session::get("user")]);
         Session::forget('user');
-        return view("login");
+        return "<script>window.location.href='/'</script>";
     }
 
     public function updateEducation(Request $req){
+        if(Session::get("user")){
         $userId = DB::select("select * from faculty WHERE ACTIVESESSION=?",[Session::get("user")]);
         DB::update("
             update EDUCATIONALBACKGROUND
@@ -82,5 +88,29 @@ class SessionHandler extends Controller
             $req->school[1], $req->course[1], $req->fromDate[1], $req->toDate[1], $req->units[1], $req->yearGrad[1], $req->honors[1],
             $userId[0]->ID]);
             return "<script>window.location.href='/home'</script>";
+        }else{
+            return "<script>window.location.href='/logout'</script>";
+        }
+    }
+    public function updatePersonalInfo(Request $req){
+        if(Session::get("user")){
+        $userId = DB::select("select * from faculty WHERE ACTIVESESSION=?",[Session::get("user")]);
+        DB::update("
+            update PERSONALINFO
+            set
+            FName=?, LName=?, MName=?, Birthdate=?, BirthPlace=?, Sex=?, Civil=?, Height=?, Weight=?, BloodType=?,
+            GSIS=?, PAGIBIG=?, PHILHEALTH=?, SSS=?, TIN=?, Citizen=?, House=?, Street=?, Subd=?, Barangay=?, City=?, Province=?, Zip=?, 
+            PermaHouse=?, PermaStreet=?,PermaSubd=?, PermaBarangay=?, PermaCity=?, PermaProvince=?, PermaZip=?, Tel=?, Phone=?, AltEmail=?
+
+            WHERE ID=?
+            ",
+            [$req->FName, $req->LName, $req->MName, $req->Birthday,$req->BirthPlace, $req->Sex, $req->CivilStatus, $req->Height, $req->Weight, $req->BloodType,
+            $req->GSIS, $req->PAGIBIG, $req->PHILHEALTH, $req->SSS, $req->TIN, $req->Citizenship, $req->House,$req->Street, $req->Subdivision,$req->Barangay, $req->City, $req->Province, $req->Zip,
+            $req->PermHouse, $req->PermStreet, $req->PermSubdivision,$req->PermBarangay, $req->PermCity, $req->PermProvince, $req->PermZip, $req->Telephone, $req->Phone, $req->altEmail,
+            $userId[0]->ID]);
+            return "<script>window.location.href='/home'</script>";
+        }else{
+            return "<script>window.location.href='/logout'</script>";
+        }
     }
 }
