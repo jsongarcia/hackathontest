@@ -1,0 +1,49 @@
+body{
+    background-color:#292929;
+}
+
+*{
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.user{
+    position: relative;
+    margin: 0 auto 100px;
+    padding: 100px;
+    text-align: center;
+}
+
+.user h1{
+    font-size:7ch;
+    color: white;
+}
+
+#input{
+    width: 35%;
+    padding: 15px 22px;
+    margin: 10px 5px;
+    border-color: white;
+    background-color:#292929;
+    color:white;
+    border-radius: 12px;
+}
+
+
+.button{
+    background-color: #33ccff;
+    padding: 10px 40px;
+    border-radius: 12px;
+    border-color: #0099ff;
+}
+
+a.log:link{
+    color: white;
+}
+
+a.log:visited{
+    color: white;
+}
+
+a.log:hover {
+    color: #33ccff;
+  }

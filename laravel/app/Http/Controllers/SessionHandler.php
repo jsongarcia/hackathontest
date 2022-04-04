@@ -38,7 +38,10 @@ class SessionHandler extends Controller
             $personalInfo = DB::select("select * from PERSONALINFO where ID=?", [$userId[0]->ID]);
             //get profilepicture
             $profilePic = DB::select("select * from PROFILEPICTURES where ID=?", [$userId[0]->ID]);
-            return view("information", ["education"=>$educationalBg, "info"=>$personalInfo, "profilePic"=>$profilePic]);
+            //get Vocational Courses
+            $vocational = DB::select("select * from VOCATIONALCOURSES where FacultyID=?", [$userId[0]->ID]);
+            return view("information", ["education"=>$educationalBg, "info"=>$personalInfo, "profilePic"=>$profilePic,
+                        "vocational"=>$vocational]);
         }else
         return "<script>window.location.href='/logout'</script>";
     }
@@ -123,6 +126,39 @@ class SessionHandler extends Controller
             $req->GSIS, $req->PAGIBIG, $req->PHILHEALTH, $req->SSS, $req->TIN, $req->Citizenship, $req->House,$req->Street, $req->Subdivision,$req->Barangay, $req->City, $req->Province, $req->Zip,
             $req->PermHouse, $req->PermStreet, $req->PermSubdivision,$req->PermBarangay, $req->PermCity, $req->PermProvince, $req->PermZip, $req->Telephone, $req->Phone, $req->altEmail,
             $userId[0]->ID]);
+            return "<script>window.location.href='/home'</script>";
+        }else{
+            return "<script>window.location.href='/logout'</script>";
+        }
+    }
+
+    public function vocational(){
+        return view("vocational");
+    }
+
+    public function addVocational(Request $r){
+        if(Session::has("user")){
+            $userId = DB::select("select * from faculty WHERE ACTIVESESSION=?",[Session::get("user")]);
+            //Insert the values
+            DB::insert("insert into VOCATIONALCOURSES(FacultyID,Name,Course,FromDate,ToDate,Units,Year,Honors)
+                        values(?,?,?,?,?,?,?,?)",[
+                            $userId[0]->ID, $r->input("school"), $r->input("course"), $r->input("fromDate"), $r->input("toDate"), $r->input("units"), $r->input("yearGrad"), $r->input("honors")
+                        ]);
+                        return "<script>window.location.href='/home'</script>";
+        }else{
+            return "<script>window.location.href='/logout'</script>";
+        }
+    }
+
+    public function editVocational(Request $r, $id){
+        if(Session::has("user")){
+            $userId = DB::select("select * from faculty WHERE ACTIVESESSION=?",[Session::get("user")]);
+            DB::update(
+                "update VOCATIONALCOURSES
+                set Name=?,Course=?, FromDate=?, ToDate=?, Units=?, Year=?, Honors=?  
+                WHERE ID=? and FacultyID=?",[$r->input("school"), $r->input("course"), $r->input("fromDate"), $r->input("toDate"), $r->input("units"), $r->input("yearGrad"), $r->input("honors"),
+                $id, $userId[0]->ID]
+            );
             return "<script>window.location.href='/home'</script>";
         }else{
             return "<script>window.location.href='/logout'</script>";

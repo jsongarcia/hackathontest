@@ -22,3 +22,7 @@ Route::post('/updateEducation', [SessionHandler::class, 'updateEducation']);
 Route::post('/updatePersonalInfo', [SessionHandler::class, 'updatePersonalInfo']);
 Route::get("/home", [SessionHandler::class, 'toHome']);
 Route::get("/logout", [SessionHandler::class, 'logout']);
+
+Route::get("/vocational", [SessionHandler::class, 'vocational']);
+Route::post("/publishVocational", [SessionHandler::class, 'addVocational']);
+Route::post("/publishVocational/{id}", [SessionHandler::class, 'editVocational']);
