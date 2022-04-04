@@ -8,26 +8,34 @@ use Session;
 class SessionHandler extends Controller
 {
     public function index(Request $r){
-        if(Session::has("user"))
-            return view("information");
-        else{
-            $email = $r->input("email");
-            $pass = $r->input("password");
-            $res = DB::select("select * from faculty where USERNAME=? and PASSWORD=?",[$email, $pass]);
-            if(count($res)==1){ //There's a match!
-                //Make a session for the user
-                $sessionKey = md5(time().$email);
-                Session::put("user", $sessionKey);
-                DB::update("update faculty set ACTIVESESSION=? WHERE ID=?",[$sessionKey, $res[0]->ID]);
-                return view('information');
-            }
-            return view("login", ['email'=>$email, 'pass'=>$pass, 'res'=>$res]);
+        if(Session::has("user")){
+            return "<script>window.location.href='/home'</script>";
+        }else{
+            if( $r->input('email') && $r->input('password')) {
+                $email = $r->input("email");
+                $pass = $r->input("password");
+                $res = DB::select("select * from faculty where USERNAME=? and PASSWORD=?",[$email, $pass]);
+                if(count($res)==1){ //There's a match!
+                    //Make a session for the user
+                    $sessionKey = md5(time().$email);
+                    Session::put("user", $sessionKey);
+                    DB::update("update faculty set ACTIVESESSION=? WHERE ID=?",[$sessionKey, $res[0]->ID]);
+                    return "<script>window.location.href='/home'</script>";
+                }else{
+                return view("login", ["msg"=>"Invalid Username/Password."]);
+                }
+            }else
+            return view("login");
         }
     }
     public function toHome(){
-        if(Session::has("user"))
-            return view("information");
-        else
+        if(Session::has("user")){
+            //Get the user id
+            $userId = DB::select("select * from faculty where ACTIVESESSION=?", [Session::get("user")]);
+            //Get the Educational bg
+            $educationalBg = DB::select("select * from EDUCATIONALBACKGROUND where ID=?",[$userId[0]->ID]);
+            return view("information", ["education"=>$educationalBg]);
+        }else
         return view("login");
     }
     public function toRegister(){
@@ -73,7 +81,6 @@ class SessionHandler extends Controller
             [$req->school[0], $req->course[0], $req->fromDate[0], $req->toDate[0], $req->units[0], $req->yearGrad[0], $req->honors[0],
             $req->school[1], $req->course[1], $req->fromDate[1], $req->toDate[1], $req->units[1], $req->yearGrad[1], $req->honors[1],
             $userId[0]->ID]);
-        
-            return view("information");
+            return "<script>window.location.href='/home'</script>";
     }
 }

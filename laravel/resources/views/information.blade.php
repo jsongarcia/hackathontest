@@ -169,11 +169,19 @@
             </tr>
             <tr>
                 <td>Name of School: </td>
-                <td><input type="text" name="school[]"></td>
+                <td><input type="text" name="school[]"
+                @if(isset($education))
+                    value="{{$education[0]->ElemSchool}}"
+                @endif
+                ></td>
             </tr>
             <tr>
                 <td>Basic Education/Degree/Course: </td>
-                <td><input type="text" name="course[]"></td>
+                <td><input type="text" name="course[]"
+                @if(isset($education))
+                    value="{{$education[0]->ElemCourse}}"
+                @endif
+                ></td>
             </tr>
             <tr>
                 <td colspan="2">Period of attendance  : </td>
@@ -181,34 +189,62 @@
             </tr>
             <tr>
                 <td>From: </td>
-                <td><input type="date" name="fromDate[]"></td>
+                <td><input type="date" name="fromDate[]"
+                @if(isset($education))
+                    value="{{$education[0]->ElemFrom}}"
+                @endif
+                ></td>
             </tr>
             <tr>
                 <td>To: </td>
-                <td><input type="date" name="toDate[]"></td>
+                <td><input type="date" name="toDate[]"
+                @if(isset($education))
+                    value="{{$education[0]->ElemTo}}"
+                @endif
+                ></td>
             </tr>
             <tr>
                 <td>Highest Level/Units Earned (if not graduated):  </td>
-                <td><input type="text" name="units[]"></td>
+                <td><input type="text" name="units[]"
+                @if(isset($education))
+                    value="{{$education[0]->ElemUnits}}"
+                @endif
+                ></td>
             </tr>
             <tr>
                 <td>Year Graduated: </td>
-                <td><input type="date" name="yearGrad[]"></td>
+                <td><input type="date" name="yearGrad[]"
+                @if(isset($education))
+                    value="{{$education[0]->ElemYearGrad}}"
+                @endif
+                ></td>
             </tr>
             <tr>
                 <td>Scholarship/Academic Honors Received: </td>
-                <td><input type="text" name="honors[]"></td>
+                <td><input type="text" name="honors[]"
+                @if(isset($education))
+                    value="{{$education[0]->ElemHonors}}"
+                @endif
+                ></td>
             </tr>
             <tr>
                 <td colspan="2"><b>Secondary</b></td>
             </tr>
             <tr>
                 <td>Name of School: </td>
-                <td><input type="text" name="school[]"></td>
+                <td><input type="text" name="school[]"
+                @if(isset($education))
+                    value="{{$education[0]->SecondSchool}}"
+                @endif
+                ></td>
             </tr>
             <tr>
                 <td>Basic Education/Degree/Course: </td>
-                <td><input type="text" name="course[]"></td>
+                <td><input type="text" name="course[]"
+                @if(isset($education))
+                    value="{{$education[0]->SecondCourse}}"
+                @endif
+                ></td>
             </tr>
             <tr>
                 <td colspan="2">Period of attendance  : </td>
@@ -216,23 +252,43 @@
             </tr>
             <tr>
                 <td>From: </td>
-                <td><input type="date" name="fromDate[]"></td>
+                <td><input type="date" name="fromDate[]"
+                @if(isset($education))
+                    value="{{$education[0]->SecondFrom}}"
+                @endif
+                ></td>
             </tr>
             <tr>
                 <td>To: </td>
-                <td><input type="date" name="toDate[]"></td>
+                <td><input type="date" name="toDate[]"
+                @if(isset($education))
+                    value="{{$education[0]->SecondTo}}"
+                @endif
+                ></td>
             </tr>
             <tr>
                 <td>Highest Level/Units Earned (if not graduated):  </td>
-                <td><input type="text" name="units[]"></td>
+                <td><input type="text" name="units[]"
+                @if(isset($education))
+                    value="{{$education[0]->SecondUnits}}"
+                @endif
+                ></td>
             </tr>
             <tr>
                 <td>Year Graduated: </td>
-                <td><input type="date" name="yearGrad[]"></td>
+                <td><input type="date" name="yearGrad[]"
+                @if(isset($education))
+                    value="{{$education[0]->SecondYearGrad}}"
+                @endif
+                ></td>
             </tr>
             <tr>
                 <td>Scholarship/Academic Honors Received: </td>
-                <td><input type="text" name="honors[]"></td>
+                <td><input type="text" name="honors[]"
+                @if(isset($education))
+                    value="{{$education[0]->SecondHonors}}"
+                @endif
+                ></td>
             </tr>
         </table><br />
         <input type="submit" value="Save Changes">

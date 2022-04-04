@@ -5,7 +5,10 @@
     <body>
         <h1>Login Page</h1>
         @if(Session::has("user"))
-         <script> window.location ={{url('/information')}} </script>
+         <script> window.location.href="/home" </script>
+        @endif
+        @if(isset($msg))
+            <p>{{$msg}}</p>
         @endif
         <form action="/" method="POST">
         @csrf
