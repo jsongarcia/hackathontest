@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\SessionHandler;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [SessionHandler::class, 'index']);
+Route::post('/', [SessionHandler::class, 'index']);
+Route::get("/register", [SessionHandler::class, 'toRegister']);
+Route::post('/addUser', [SessionHandler::class, 'addUser']);
+Route::post('/updateEducation', [SessionHandler::class, 'updateEducation']);
+Route::get("/home", [SessionHandler::class, 'toHome']);
+Route::get("/logout", [SessionHandler::class, 'logout']);
