@@ -6,9 +6,9 @@
     <title>Document</title>
 </head>
 <body>
-<h3>ADD VOCATIONAL/TRADE COURSE </h3>
+<h3>ADD COLLEGE </h3>
         <table>
-        <form action="/publishVocational" method="POST">
+        <form action="/publishCollege" method="POST">
             @csrf
             <tr>
                 <td>Name of School: </td>

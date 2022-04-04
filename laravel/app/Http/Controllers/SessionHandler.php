@@ -40,8 +40,12 @@ class SessionHandler extends Controller
             $profilePic = DB::select("select * from PROFILEPICTURES where ID=?", [$userId[0]->ID]);
             //get Vocational Courses
             $vocational = DB::select("select * from VOCATIONALCOURSES where FacultyID=?", [$userId[0]->ID]);
+             //get Colleges
+             $colleges = DB::select("select * from COLLEGES where FacultyID=?", [$userId[0]->ID]);
+             //get Graduates
+             $graduate = DB::select("select * from GRADUATESTUDIES where FacultyID=?", [$userId[0]->ID]);
             return view("information", ["education"=>$educationalBg, "info"=>$personalInfo, "profilePic"=>$profilePic,
-                        "vocational"=>$vocational]);
+                        "vocational"=>$vocational, 'colleges'=>$colleges, 'graduate'=>$graduate]);
         }else
         return "<script>window.location.href='/logout'</script>";
     }
@@ -135,7 +139,76 @@ class SessionHandler extends Controller
     public function vocational(){
         return view("vocational");
     }
-
+    public function college(){
+        return view("college");
+    }
+    public function graduate(){
+        return view("graduate");
+    }
+    public function addCollege(Request $r){
+        if(Session::has("user")){
+            $userId = DB::select("select * from faculty WHERE ACTIVESESSION=?",[Session::get("user")]);
+            //Insert the values
+            DB::insert("insert into COLLEGES(FacultyID,Name,Course,FromDate,ToDate,Units,Year,Honors)
+                        values(?,?,?,?,?,?,?,?)",[
+                            $userId[0]->ID, $r->input("school"), $r->input("course"), $r->input("fromDate"), $r->input("toDate"), $r->input("units"), $r->input("yearGrad"), $r->input("honors")
+                        ]);
+                        return "<script>window.location.href='/home'</script>";
+        }else{
+            return "<script>window.location.href='/logout'</script>";
+        }
+    }
+    public function addGraduate(Request $r){
+        if(Session::has("user")){
+            $userId = DB::select("select * from faculty WHERE ACTIVESESSION=?",[Session::get("user")]);
+            //Insert the values
+            DB::insert("insert into GRADUATESTUDIES(FacultyID,Name,Course,FromDate,ToDate,Units,Year,Honors)
+                        values(?,?,?,?,?,?,?,?)",[
+                            $userId[0]->ID, $r->input("school"), $r->input("course"), $r->input("fromDate"), $r->input("toDate"), $r->input("units"), $r->input("yearGrad"), $r->input("honors")
+                        ]);
+                        return "<script>window.location.href='/home'</script>";
+        }else{
+            return "<script>window.location.href='/logout'</script>";
+        }
+    }
+    public function editGraduate(Request $r, $id){
+        if(Session::has("user")){
+            $userId = DB::select("select * from faculty WHERE ACTIVESESSION=?",[Session::get("user")]);
+            if($r->input("action")=="Save Changes"){
+                DB::update(
+                    "update GRADUATESTUDIES
+                    set Name=?,Course=?, FromDate=?, ToDate=?, Units=?, Year=?, Honors=?  
+                    WHERE ID=? and FacultyID=?",[$r->input("school"), $r->input("course"), $r->input("fromDate"), $r->input("toDate"), $r->input("units"), $r->input("yearGrad"), $r->input("honors"),
+                    $id, $userId[0]->ID]
+                );
+            }else if($r->input("action")=="Delete"){
+                DB::delete("delete from GRADUATESTUDIES
+                            WHERE ID=? and FacultyID=?", [$id, $userId[0]->ID]);
+            }
+            return "<script>window.location.href='/home'</script>";
+        }else{
+            return "<script>window.location.href='/logout'</script>";
+        }
+    }
+    public function editCollege(Request $r, $id){
+        if(Session::has("user")){
+            $userId = DB::select("select * from faculty WHERE ACTIVESESSION=?",[Session::get("user")]);
+            if($r->input("action")=="Save Changes"){
+                DB::update(
+                    "update COLLEGES
+                    set Name=?,Course=?, FromDate=?, ToDate=?, Units=?, Year=?, Honors=?  
+                    WHERE ID=? and FacultyID=?",[$r->input("school"), $r->input("course"), $r->input("fromDate"), $r->input("toDate"), $r->input("units"), $r->input("yearGrad"), $r->input("honors"),
+                    $id, $userId[0]->ID]
+                );
+            }else if($r->input("action")=="Delete"){
+                DB::delete("delete from COLLEGES
+                            WHERE ID=? and FacultyID=?", [$id, $userId[0]->ID]);
+            }
+            return "<script>window.location.href='/home'</script>";
+        }else{
+            return "<script>window.location.href='/logout'</script>";
+        }
+    }
     public function addVocational(Request $r){
         if(Session::has("user")){
             $userId = DB::select("select * from faculty WHERE ACTIVESESSION=?",[Session::get("user")]);
@@ -153,12 +226,17 @@ class SessionHandler extends Controller
     public function editVocational(Request $r, $id){
         if(Session::has("user")){
             $userId = DB::select("select * from faculty WHERE ACTIVESESSION=?",[Session::get("user")]);
-            DB::update(
-                "update VOCATIONALCOURSES
-                set Name=?,Course=?, FromDate=?, ToDate=?, Units=?, Year=?, Honors=?  
-                WHERE ID=? and FacultyID=?",[$r->input("school"), $r->input("course"), $r->input("fromDate"), $r->input("toDate"), $r->input("units"), $r->input("yearGrad"), $r->input("honors"),
-                $id, $userId[0]->ID]
-            );
+            if($r->input("action")=="Save Changes"){
+                DB::update(
+                    "update VOCATIONALCOURSES
+                    set Name=?,Course=?, FromDate=?, ToDate=?, Units=?, Year=?, Honors=?  
+                    WHERE ID=? and FacultyID=?",[$r->input("school"), $r->input("course"), $r->input("fromDate"), $r->input("toDate"), $r->input("units"), $r->input("yearGrad"), $r->input("honors"),
+                    $id, $userId[0]->ID]
+                );
+            }else if($r->input("action")=="Delete"){
+                DB::delete("delete from VOCATIONALCOURSES
+                            WHERE ID=? and FacultyID=?", [$id, $userId[0]->ID]);
+            }
             return "<script>window.location.href='/home'</script>";
         }else{
             return "<script>window.location.href='/logout'</script>";

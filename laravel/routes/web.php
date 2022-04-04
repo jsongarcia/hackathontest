@@ -26,3 +26,11 @@ Route::get("/logout", [SessionHandler::class, 'logout']);
 Route::get("/vocational", [SessionHandler::class, 'vocational']);
 Route::post("/publishVocational", [SessionHandler::class, 'addVocational']);
 Route::post("/publishVocational/{id}", [SessionHandler::class, 'editVocational']);
+
+Route::get("/college", [SessionHandler::class, 'college']);
+Route::post("/publishCollege", [SessionHandler::class, 'addCollege']);
+Route::post("/publishCollege/{id}", [SessionHandler::class, 'editCollege']);
+
+Route::get("/graduate", [SessionHandler::class, 'graduate']);
+Route::post("/publishGraduate", [SessionHandler::class, 'addGraduate']);
+Route::post("/publishGraduate/{id}", [SessionHandler::class, 'editGraduate']);

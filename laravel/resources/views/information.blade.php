@@ -450,7 +450,7 @@
         </table><br />
         <input type="submit" value="Save Changes">
         </form>
-
+        <hr/>
         <p><b>VOCATIONAL COURSES</b></p>
         @foreach($vocational as $record)
         <table>
@@ -489,12 +489,102 @@
                 <td><input type="text" name="honors" value="{{$record->Honors}}"></td>
             </tr>
         </table><br />
-        <input type="submit" value="Save Changes">
+        <input type="submit" name="action" value="Save Changes">
+        <input type="submit" name="action" value="Delete">
         </form>
         @endforeach
-
-
+        <br/><br/>
         <button><a href="/vocational">Add Vocational/Trade Course</a></button>
+        <hr/>
+        <p><b>COLLEGES</b></p>
+        @foreach($colleges as $record)
+        <table>
+        <form action="/publishCollege/{{$record->ID}}" method="POST">
+            @csrf
+            <tr>
+                <td>Name of School: </td>
+                <td><input type="text" name="school" value="{{$record->Name}}"></td>
+            </tr>
+            <tr>
+                <td>Basic Education/Degree/Course: </td>
+                <td><input type="text" name="course" value="{{$record->Course}}"></td>
+            </tr>
+            <tr>
+                <td colspan="2">Period of attendance  : </td>
+
+            </tr>
+            <tr>
+                <td>From: </td>
+                <td><input type="date" name="fromDate" value="{{$record->FromDate}}"></td>
+            </tr>
+            <tr>
+                <td>To: </td>
+                <td><input type="date" name="toDate" value="{{$record->ToDate}}"></td>
+            </tr>
+            <tr>
+                <td>Highest Level/Units Earned (if not graduated):  </td>
+                <td><input type="text" name="units" value="{{$record->Units}}"></td>
+            </tr>
+            <tr>
+                <td>Year Graduated: </td>
+                <td><input type="date" name="yearGrad" value="{{$record->Year}}"></td>
+            </tr>
+            <tr>
+                <td>Scholarship/Academic Honors Received: </td>
+                <td><input type="text" name="honors" value="{{$record->Honors}}"></td>
+            </tr>
+        </table><br />
+        <input type="submit" name="action" value="Save Changes">
+        <input type="submit" name="action" value="Delete">
+        </form>
+        @endforeach
+        <br /><br />
+        <button><a href="/college">Add College</a></button>
+        <hr />
+        <p><b>GRADUATE STUDIES</b></p>
+        @foreach($graduate as $record)
+        <table>
+        <form action="/publishGraduate/{{$record->ID}}" method="POST">
+            @csrf
+            <tr>
+                <td>Name of School: </td>
+                <td><input type="text" name="school" value="{{$record->Name}}"></td>
+            </tr>
+            <tr>
+                <td>Basic Education/Degree/Course: </td>
+                <td><input type="text" name="course" value="{{$record->Course}}"></td>
+            </tr>
+            <tr>
+                <td colspan="2">Period of attendance  : </td>
+
+            </tr>
+            <tr>
+                <td>From: </td>
+                <td><input type="date" name="fromDate" value="{{$record->FromDate}}"></td>
+            </tr>
+            <tr>
+                <td>To: </td>
+                <td><input type="date" name="toDate" value="{{$record->ToDate}}"></td>
+            </tr>
+            <tr>
+                <td>Highest Level/Units Earned (if not graduated):  </td>
+                <td><input type="text" name="units" value="{{$record->Units}}"></td>
+            </tr>
+            <tr>
+                <td>Year Graduated: </td>
+                <td><input type="date" name="yearGrad" value="{{$record->Year}}"></td>
+            </tr>
+            <tr>
+                <td>Scholarship/Academic Honors Received: </td>
+                <td><input type="text" name="honors" value="{{$record->Honors}}"></td>
+            </tr>
+        </table><br />
+        <input type="submit" name="action" value="Save Changes">
+        <input type="submit" name="action" value="Delete">
+        </form>
+        @endforeach
+        <br /><br />
+        <button><a href="/graduate">Add Graduate Study</a></button>
         <script>
             function logout(){
                 window.location="/logout"
