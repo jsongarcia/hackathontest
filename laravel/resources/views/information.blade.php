@@ -12,8 +12,16 @@
         <button onclick="logout()">Logout</button><br>
         <h2>INFORMATION STATUS</h2>
         <h3>FACULTY PROFILE PERSONAL INFORMATION: </h3>
+        <form action="/updatePersonalInfo" method="POST" enctype="multipart/form-data">
+            <img
+            @if(isset($profilePic))
+                src="profilepictures/{{$profilePic[0]->DIRECTORY}}"
+                else
+                src="profilepictures/default-pic.png"
+            @endif
+            width=200px height=200px>
+            <input type="file" accept="image/*" name="profile">
         <table>
-            <form action="/updatePersonalInfo" method="POST">
                 @csrf
             <tr>
                 <td>Email Address: </td>
@@ -304,9 +312,9 @@
         <tr>
         <td><input type="submit" value="Save Changes"></td>
         </tr>
-        </form>
+        
         </table>
-
+        </form>
 
         <h3>EDUCATIONAL BACKGROUND: </h3>
         <table>

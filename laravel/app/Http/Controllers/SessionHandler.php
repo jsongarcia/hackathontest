@@ -36,7 +36,9 @@ class SessionHandler extends Controller
             $educationalBg = DB::select("select * from EDUCATIONALBACKGROUND where ID=?",[$userId[0]->ID]);
             //Get Personal Info
             $personalInfo = DB::select("select * from PERSONALINFO where ID=?", [$userId[0]->ID]);
-            return view("information", ["education"=>$educationalBg, "info"=>$personalInfo]);
+            //get profilepicture
+            $profilePic = DB::select("select * from PROFILEPICTURES where ID=?", [$userId[0]->ID]);
+            return view("information", ["education"=>$educationalBg, "info"=>$personalInfo, "profilePic"=>$profilePic]);
         }else
         return "<script>window.location.href='/logout'</script>";
     }
@@ -57,9 +59,10 @@ class SessionHandler extends Controller
             DB::statement("insert into faculty(USERNAME, PASSWORD) VALUES(?,?)", [$email, $pas1]);
             $id = DB::select("select * from faculty where USERNAME=?",[$email]);
 
-            //Make Educational Background, Personal Info
+            //Make Educational Background, Personal Info, ProfilePicture
             DB::statement("insert into EDUCATIONALBACKGROUND(ID) values(?)", [$id[0]->ID]);
             DB::statement("insert into PERSONALINFO(ID) values(?)", [$id[0]->ID]);
+            DB::statement("insert into PROFILEPICTURES(ID,DIRECTORY) values(?,?)", [$id[0]->ID, "default-pic.png"]);
             return view("/register", ['msg'=>"Registered succesfully!"]);
         }else{
             //Return an error
@@ -95,6 +98,18 @@ class SessionHandler extends Controller
     public function updatePersonalInfo(Request $req){
         if(Session::get("user")){
         $userId = DB::select("select * from faculty WHERE ACTIVESESSION=?",[Session::get("user")]);
+        //Get the profile pic first
+        if($_FILES["profile"]){
+            $f = $_FILES["profile"];
+            $name = $f["name"];
+            $tempname = $f["tmp_name"];
+            $newName= time().".".pathinfo($name, PATHINFO_EXTENSION);
+            $name=$newName;
+            move_uploaded_file($tempname, "profilepictures/$newName");
+
+            //Send to Database
+            DB::update("update PROFILEPICTURES set DIRECTORY=? where ID=?",[$newName, $userId[0]->ID]);
+        }
         DB::update("
             update PERSONALINFO
             set
