@@ -585,6 +585,47 @@
         @endforeach
         <br /><br />
         <button><a href="/graduate">Add Graduate Study</a></button>
+        <hr />
+        <p><b>CIVIL SERVICE</b></p>
+        @foreach($civil as $record)
+        <table>
+        <form action="/publishCivil/{{$record->ID}}" method="POST">
+            @csrf
+            <tr>
+                <td>Civil Service Type: </td>
+                <td><input type="text" name="civil" value="{{$record->Service}}"></td>
+            </tr>
+            <tr>
+                <td>Rating: </td>
+                <td><input type="text" name="rating" value="{{$record->Rating}}"></td>
+            </tr>
+            <tr>
+                <td>Date of Examination/Conferment: </td>
+                <td><input type="date" name="date" value="{{$record->ExamDate}}"></td>
+            </tr>
+            <tr>
+                <td>Place of Examination/Confement: </td>
+                <td><input type="text" name="place" value="{{$record->ExamPlace}}"></td>
+            </tr>
+            <tr>
+                <td>License (if applicable):  </td>
+            </tr>
+            <tr>
+                <td>License Number: </td>
+                <td><input type="text" name="num" value="{{$record->LicenseNo}}"></td>
+            </tr>
+            <tr>
+                <td>License validity: </td>
+                <td><input type="date" name="valid" value="{{$record->Validity}}"></td>
+            </tr>
+        </table><br />
+        <br />
+        <input type="submit" name="action" value="Save Changes">
+        <input type="submit" name="action" value="Delete">
+        </form>
+        @endforeach
+        <br /><br />
+        <button><a href="/civil">Add Civil Service</a></button>
         <script>
             function logout(){
                 window.location="/logout"

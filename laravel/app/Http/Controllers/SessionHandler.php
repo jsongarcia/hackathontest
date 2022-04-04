@@ -44,8 +44,10 @@ class SessionHandler extends Controller
              $colleges = DB::select("select * from COLLEGES where FacultyID=?", [$userId[0]->ID]);
              //get Graduates
              $graduate = DB::select("select * from GRADUATESTUDIES where FacultyID=?", [$userId[0]->ID]);
+             //getCivils
+             $civils = DB::select("select * from CIVILSERVICE where FacultyID=?", [$userId[0]->ID]);
             return view("information", ["education"=>$educationalBg, "info"=>$personalInfo, "profilePic"=>$profilePic,
-                        "vocational"=>$vocational, 'colleges'=>$colleges, 'graduate'=>$graduate]);
+                        "vocational"=>$vocational, 'colleges'=>$colleges, 'graduate'=>$graduate, 'civil'=>$civils]);
         }else
         return "<script>window.location.href='/logout'</script>";
     }
@@ -144,6 +146,41 @@ class SessionHandler extends Controller
     }
     public function graduate(){
         return view("graduate");
+    }
+    public function civil(){
+        return view("civil");
+    }
+    public function addCivil(Request $r){
+        if(Session::has("user")){
+            $userId = DB::select("select * from faculty WHERE ACTIVESESSION=?",[Session::get("user")]);
+            //Insert the values
+            DB::insert("insert into CIVILSERVICE(FacultyID, Service, Rating, ExamDate, ExamPlace, LicenseNo, Validity)
+                        values(?,?,?,?,?,?,?)",[
+                            $userId[0]->ID, $r->input("civil"), $r->input("rating"), $r->input("date"), $r->input("place"), $r->input("num"), $r->input("validity")
+                        ]);
+                        return "<script>window.location.href='/home'</script>";
+        }else{
+            return "<script>window.location.href='/logout'</script>";
+        }
+    }
+    public function editCivil(Request $r, $id){
+        if(Session::has("user")){
+            $userId = DB::select("select * from faculty WHERE ACTIVESESSION=?",[Session::get("user")]);
+            if($r->input("action")=="Save Changes"){
+                DB::update(
+                    "update CIVILSERVICE
+                    set Service=?, Rating=?, ExamDate=?, ExamPlace=?, LicenseNo=?, Validity=?
+                    WHERE ID=? and FacultyID=?",[$r->input("civil"), $r->input("rating"), $r->input("date"), $r->input("place"), $r->input("num"), $r->input("valid"),
+                    $id, $userId[0]->ID]
+                );
+            }else if($r->input("action")=="Delete"){
+                DB::delete("delete from CIVILSERVICE
+                            WHERE ID=? and FacultyID=?", [$id, $userId[0]->ID]);
+            }
+            return "<script>window.location.href='/home'</script>";
+        }else{
+            return "<script>window.location.href='/logout'</script>";
+        }
     }
     public function addCollege(Request $r){
         if(Session::has("user")){

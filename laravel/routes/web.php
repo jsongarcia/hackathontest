@@ -34,3 +34,7 @@ Route::post("/publishCollege/{id}", [SessionHandler::class, 'editCollege']);
 Route::get("/graduate", [SessionHandler::class, 'graduate']);
 Route::post("/publishGraduate", [SessionHandler::class, 'addGraduate']);
 Route::post("/publishGraduate/{id}", [SessionHandler::class, 'editGraduate']);
+
+Route::get("/civil", [SessionHandler::class, 'civil']);
+Route::post("/publishCivil", [SessionHandler::class, 'addCivil']);
+Route::post("/publishCivil/{id}", [SessionHandler::class, 'editCivil']);
