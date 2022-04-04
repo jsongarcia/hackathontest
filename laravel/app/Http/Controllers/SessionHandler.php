@@ -46,8 +46,11 @@ class SessionHandler extends Controller
              $graduate = DB::select("select * from GRADUATESTUDIES where FacultyID=?", [$userId[0]->ID]);
              //getCivils
              $civils = DB::select("select * from CIVILSERVICE where FacultyID=?", [$userId[0]->ID]);
+              //getWorks
+            $works = DB::select("select * from WORKEXPERIENCE where FacultyID=?", [$userId[0]->ID]);
             return view("information", ["education"=>$educationalBg, "info"=>$personalInfo, "profilePic"=>$profilePic,
-                        "vocational"=>$vocational, 'colleges'=>$colleges, 'graduate'=>$graduate, 'civil'=>$civils]);
+                        "vocational"=>$vocational, 'colleges'=>$colleges, 'graduate'=>$graduate, 'civil'=>$civils,
+                        'works'=>$works]);
         }else
         return "<script>window.location.href='/logout'</script>";
     }
@@ -149,6 +152,47 @@ class SessionHandler extends Controller
     }
     public function civil(){
         return view("civil");
+    }
+    public function work(){
+        return view("work");
+    }
+    public function addWork(Request $r){
+        if(Session::has("user")){
+            $userId = DB::select("select * from faculty WHERE ACTIVESESSION=?",[Session::get("user")]);
+            $gov=0;
+            if($r->input("government")=="yes")
+                $gov=1;
+            //Insert the values
+            DB::insert("insert into WORKEXPERIENCE(FacultyID, FromDate , ToDate , Position , Department , Salary , SalaryGrade ,Status ,Government )
+                        values(?,?,?,?,?,?,?,?,?)",[
+                            $userId[0]->ID, $r->input("fromDate"), $r->input("toDate"), $r->input("position"), $r->input("department"), $r->input("salary"), $r->input("salarygrade"), $r->input("status"), $gov
+                        ]);
+                        return "<script>window.location.href='/home'</script>";
+        }else{
+            return "<script>window.location.href='/logout'</script>";
+        }
+    }
+    public function editWork(Request $r, $id){
+        if(Session::has("user")){
+            $userId = DB::select("select * from faculty WHERE ACTIVESESSION=?",[Session::get("user")]);
+            $gov=0;
+            if($r->input("government")=="yes")
+                $gov=1;
+            if($r->input("action")=="Save Changes"){
+                DB::update(
+                    "update WORKEXPERIENCE
+                    set FromDate=? , ToDate=? , Position=? , Department=? , Salary=? , SalaryGrade=? ,Status=? ,Government=?
+                    WHERE ID=? and FacultyID=?",[$r->input("fromDate"), $r->input("toDate"), $r->input("position"), $r->input("department"), $r->input("salary"), $r->input("salarygrade"), $r->input("status"), $gov,
+                    $id, $userId[0]->ID]
+                );
+            }else if($r->input("action")=="Delete"){
+                DB::delete("delete from WORKEXPERIENCE
+                            WHERE ID=? and FacultyID=?", [$id, $userId[0]->ID]);
+            }
+            return "<script>window.location.href='/home'</script>";
+        }else{
+            return "<script>window.location.href='/logout'</script>";
+        }
     }
     public function addCivil(Request $r){
         if(Session::has("user")){
