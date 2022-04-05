@@ -14,6 +14,7 @@
                 <li><a href="/civil">Civil Service</a></li>
                 <li><a href="/work">Work Experience</a></li>
                 <li><a href="/cert">Certifications</a></li>
+                <li><a href="/report">Generate Reports</a></li>
                 <li><a href="/logout">Log Out</a></li>
             </ul>
         </div>
@@ -76,7 +77,11 @@
             </tr>
             <tr>
                 <td>Age: </td>
-                <td><input type="text" name="age" disabled></td>
+                <td><input type="text" name="age" disabled
+                @if(isset($info))
+                    value="{{ date_diff(date_create($info[0]->Birthdate),date_create(date('Y-m-d')))->format('%y') }}"
+                @endif
+                ></td>
             </tr>
             <tr>
                 <td>Place of Birth: </td>

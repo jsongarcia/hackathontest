@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\SessionHandler;
+use App\Http\Controllers\ReportHandler;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -55,3 +56,5 @@ Route::get("/cert", [SessionHandler::class, 'certHome']);
 Route::get("/cert/addEntry", [SessionHandler::class, 'addCert']);
 Route::post("/publishCert", [SessionHandler::class, 'certAdd']);
 Route::post("/publishCert/{id}", [SessionHandler::class, 'editCert']);
+
+Route::get("/report",[ReportHandler::class, 'report']);
