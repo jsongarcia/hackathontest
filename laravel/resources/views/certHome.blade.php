@@ -19,48 +19,51 @@
                 <li><a href="/logout">Log Out</a></li>
             </ul>
         </div>
-<p><b>GRADUATE STUDIES</b></p>
+<p><b>CERTIFICATES</b></p>
         @foreach($data ?? [] as $record)
         <table>
-        <form action="/publishGraduate/{{$record->ID}}" method="POST">
+        <form action="/publishCert/{{$record->ID}}" method="POST" enctype="multipart/form-data">
             @csrf
             <tr>
-                <td>Name of School: </td>
-                <td><input type="text" name="school" value="{{$record->Name}}"></td>
+                <td>Title: </td>
+                <td><input type="text" name="title" value="{{$record->Title}}"></td>
             </tr>
             <tr>
-                <td>Basic Education/Degree/Course: </td>
-                <td><input type="text" name="course" value="{{$record->Course}}"></td>
+                <td>Type: </td>
+                <td><input type="text" name="type" value="{{$record->Type}}"></td>
             </tr>
             <tr>
-                <td colspan="2">Period of attendance  : </td>
-
+                <td>Date of Attendance: </td>
             </tr>
             <tr>
-                <td>From: </td>
-                <td><input type="date" name="fromDate" value="{{$record->FromDate}}"></td>
+                <td>From</td>
+                <td><input type="date" name="fromDate"  value="{{$record->FromDate}}"></td>
             </tr>
             <tr>
-                <td>To: </td>
+                <td>To</td>
                 <td><input type="date" name="toDate" value="{{$record->ToDate}}"></td>
             </tr>
             <tr>
-                <td>Highest Level/Units Earned (if not graduated):  </td>
-                <td><input type="text" name="units" value="{{$record->Units}}"></td>
+                <td>Number of Hours: </td>
+                <td><input type="text" name="hours" value="{{$record->Hours}}"></td>
             </tr>
             <tr>
-                <td>Year Graduated: </td>
-                <td><input type="date" name="yearGrad" value="{{$record->Year}}"></td>
+                <td>Conducted/Sponsored By: </td>
+                <td><input type="text" name="conducted" value="{{$record->Conducted}}"></td>
             </tr>
             <tr>
-                <td>Scholarship/Academic Honors Received: </td>
-                <td><input type="text" name="honors" value="{{$record->Honors}}"></td>
+                <td>Type of LD: </td>
+                <td><input type="text" name="ldtype" value="{{$record->LDType}}"></td>
+            </tr>
+            <tr>
+                <td>Certificate(IMG/PDF): </td>
+                <td><input type="file" name="upload" accept="image/*, application/pdf"></td>
             </tr>
         </table><br />
-        <input type="submit" name="action" value="Save Changes">
-        </form>
+        <iframe src="certificates/{{$record->Certificate}}" height=200px width=300px></iframe><br />
+        <input type="submit" value="Save Changes"><br /></form>
         @endforeach
         <br /><br />
-        <button><a href="/graduate/addEntry">Add Graduate Study</a></button>
+        <button><a href="/cert/addEntry">Add Certificate</a></button>
 </body>
 </html>

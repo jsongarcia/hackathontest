@@ -3,7 +3,7 @@
         <title>Login Page</title>
     </head>
     <body>
-        <h1>Login Page</h1>
+        <h1 class="title">Login Page</h1>
         @if(Session::has("user"))
          <script> window.location.href="/home" </script>
         @endif

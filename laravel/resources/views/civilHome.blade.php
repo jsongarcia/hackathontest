@@ -9,12 +9,13 @@
 <div class="topbar">
             <ul>
                 <li><a href="/home">Personal Information</a></li>
-                <li><a href="/education/home">Education</a></li>
-                <li><a href="/vocational/home">Vocational/Trade Course</a></li>
-                <li><a href="/college/home">College</a></li>
-                <li><a href="/graduate/home">Graduate Studies</a></li>
-                <li><a href="/civil/home">Civil Service</a></li>
-                <li><a href="/work/home">Work Experience</a></li>
+                <li><a href="/education">Education</a></li>
+                <li><a href="/vocational">Vocational/Trade Course</a></li>
+                <li><a href="/college">College</a></li>
+                <li><a href="/graduate">Graduate Studies</a></li>
+                <li><a href="/civil">Civil Service</a></li>
+                <li><a href="/work">Work Experience</a></li>
+                <li><a href="/cert">Certifications</a></li>
                 <li><a href="/logout">Log Out</a></li>
             </ul>
         </div>
@@ -53,10 +54,9 @@
         </table><br />
         <br />
         <input type="submit" name="action" value="Save Changes">
-        <input type="submit" name="action" value="Delete">
         </form>
         @endforeach
         <br /><br />
-        <button><a href="/civil">Add Civil Service</a></button>
+        <button><a href="/civil/addEntry">Add Civil Service</a></button>
 </body>
 </html>

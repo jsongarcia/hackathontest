@@ -4,6 +4,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=1, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="">
 </head>
 <body>
 <div class="topbar">
@@ -19,36 +20,44 @@
                 <li><a href="/logout">Log Out</a></li>
             </ul>
         </div>
-<h3>ADD CIVIL SERVICE</h3>
+<h3>ADD CERTIFICATION</h3>
         <table>
-        <form action="/publishCivil" method="POST">
+        <form action="/publishCert" method="POST" enctype="multipart/form-data">
             @csrf
             <tr>
-                <td>Civil Service Type: </td>
-                <td><input type="text" name="civil"></td>
+                <td>Title: </td>
+                <td><input type="text" name="title"></td>
             </tr>
             <tr>
-                <td>Rating: </td>
-                <td><input type="text" name="rating"></td>
+                <td>Type: </td>
+                <td><input type="text" name="type"></td>
             </tr>
             <tr>
-                <td>Date of Examination/Conferment: </td>
-                <td><input type="date" name="date"></td>
+                <td>Date of Attendance: </td>
             </tr>
             <tr>
-                <td>Place of Examination/Confement: </td>
-                <td><input type="text" name="place"></td>
+                <td>From</td>
+                <td><input type="date" name="fromDate" format="MM DD YYYY"></td>
             </tr>
             <tr>
-                <td>License (if applicable):  </td>
+                <td>To</td>
+                <td><input type="date" name="toDate"></td>
             </tr>
             <tr>
-                <td>License Number: </td>
-                <td><input type="text" name="num"></td>
+                <td>Number of Hours: </td>
+                <td><input type="text" name="hours"></td>
             </tr>
             <tr>
-                <td>License validity: </td>
-                <td><input type="date" name="validity"></td>
+                <td>Conducted/Sponsored By: </td>
+                <td><input type="text" name="conducted"></td>
+            </tr>
+            <tr>
+                <td>Type of LD: </td>
+                <td><input type="text" name="ldtype"></td>
+            </tr>
+            <tr>
+                <td>Certificate(IMG/PDF): </td>
+                <td><input type="file" name="upload" accept="image/*, application/pdf"></td>
             </tr>
         </table><br />
         <input type="submit" value="Add Entry">

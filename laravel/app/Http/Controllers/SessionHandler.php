@@ -88,8 +88,27 @@ class SessionHandler extends Controller
             [$req->school[0], $req->course[0], $req->fromDate[0], $req->toDate[0], $req->units[0], $req->yearGrad[0], $req->honors[0],
             $req->school[1], $req->course[1], $req->fromDate[1], $req->toDate[1], $req->units[1], $req->yearGrad[1], $req->honors[1],
             $userId[0]->ID]);
-            return "<script>window.location.href='/education/home'</script>";
+            return "<script>window.location.href='/education'</script>";
         }else{
+            return "<script>window.location.href='/logout'</script>";
+        }
+    }
+    public function certAdd(Request $r){
+        if(Session::get("user")){
+            $userId = DB::select("select * from faculty WHERE ACTIVESESSION=?",[Session::get("user")]);
+            $f = $_FILES["upload"];
+            $name = $f["name"];
+            $tempname = $f["tmp_name"];
+            $newName= time().".".pathinfo($name, PATHINFO_EXTENSION);
+            $name=$newName;
+            move_uploaded_file($tempname, "certificates/$newName");
+            //Send to Database
+            DB::insert("insert into CERTIFICATIONS(FacultyID,Title,Type,FromDate,ToDate,Hours,LDType,Conducted,Certificate)
+            values(?,?,?,?,?,?,?,?,?)",[
+                $userId[0]->ID, $r->input("title"), $r->input("type"), $r->input("fromDate"), $r->input("toDate"), $r->input("hours"),$r->input("ldtype"), $r->input("conducted"), $newName
+            ]);
+            return "<script>window.location.href='/cert'</script>";
+         }else{
             return "<script>window.location.href='/logout'</script>";
         }
     }
@@ -126,6 +145,33 @@ class SessionHandler extends Controller
             return "<script>window.location.href='/logout'</script>";
         }
     }
+    public function editCert(Request $req, $id){
+        if(Session::get("user")){
+        $userId = DB::select("select * from faculty WHERE ACTIVESESSION=?",[Session::get("user")]);
+        //Get the profile pic first
+        if(strlen($_FILES["upload"]['name'])>0){
+            $f = $_FILES["upload"];
+            $name = $f["name"];
+            $tempname = $f["tmp_name"];
+            $newName= time().".".pathinfo($name, PATHINFO_EXTENSION);
+            $name=$newName;
+            move_uploaded_file($tempname, "certificates/$newName");
+            //Send to Database
+            DB::update("update CERTIFICATIONS set Certificate=? where ID=?",[$newName, $id]);
+        }
+        DB::update("
+            update CERTIFICATIONS
+            set
+            Title=?, Type=?, FromDate=?, ToDate=?, Hours=?, LDType=?, Conducted=?
+            WHERE ID=?
+            ",
+            [$req->title, $req->type,$req->fromDate,$req->toDate,$req->hours,$req->ldtype,$req->conducted,
+            $id]);
+            return "<script>window.location.href='/cert'</script>";
+        }else{
+            return "<script>window.location.href='/logout'</script>";
+        }
+    }
     public function educationHome(){
         if(Session::has("user")){
             $userId = DB::select("select * from faculty where ACTIVESESSION=?", [Session::get("user")]);
@@ -146,12 +192,71 @@ class SessionHandler extends Controller
             return "<script>window.location.href='/logout'</script>";
         }
     }
+    public function certHome(){
+        if(Session::has("user")){
+            $userId = DB::select("select * from faculty where ACTIVESESSION=?", [Session::get("user")]);
+            //Get the data
+            $data = DB::select("select * from CERTIFICATIONS where FacultyID=?",[$userId[0]->ID]);
+            return view("certHome", ['data'=>$data]);
+        }else{
+            return "<script>window.location.href='/logout'</script>";
+        }
+    }
+    public function addCert(){
+        if(Session::has("user")){
+            return view("cert");
+        }else{
+            return "<script>window.location.href='/logout'</script>";
+        }
+    }
     public function workHome(){
         if(Session::has("user")){
             $userId = DB::select("select * from faculty where ACTIVESESSION=?", [Session::get("user")]);
             //Get the data
             $data = DB::select("select * from WORKEXPERIENCE where FacultyID=?",[$userId[0]->ID]);
             return view("workHome", ['data'=>$data]);
+        }else{
+            return "<script>window.location.href='/logout'</script>";
+        }
+    }
+    public function workAdd(){
+        if(Session::has("user")){
+            return view("work");
+        }else{
+            return "<script>window.location.href='/logout'</script>";
+        }
+    }
+    public function graduateAdd(){
+        if(Session::has("user")){
+            return view("graduate");
+        }else{
+            return "<script>window.location.href='/logout'</script>";
+        }
+    }
+    public function vocationalAdd(){
+        if(Session::has("user")){
+            return view("vocational");
+        }else{
+            return "<script>window.location.href='/logout'</script>";
+        }
+    }
+    public function collegeAdd(){
+        if(Session::has("user")){
+            return view("college");
+        }else{
+            return "<script>window.location.href='/logout'</script>";
+        }
+    }
+    public function civilAdd(){
+        if(Session::has("user")){
+            return view("civil");
+        }else{
+            return "<script>window.location.href='/logout'</script>";
+        }
+    }
+    public function cert(){
+        if(Session::has("user")){
+            return view("cert");
         }else{
             return "<script>window.location.href='/logout'</script>";
         }
@@ -186,21 +291,6 @@ class SessionHandler extends Controller
             return "<script>window.location.href='/logout'</script>";
         }
     }
-    public function vocational(){
-        return view("vocational");
-    }
-    public function college(){
-        return view("college");
-    }
-    public function graduate(){
-        return view("graduate");
-    }
-    public function civil(){
-        return view("civil");
-    }
-    public function work(){
-        return view("work");
-    }
     public function addWork(Request $r){
         if(Session::has("user")){
             $userId = DB::select("select * from faculty WHERE ACTIVESESSION=?",[Session::get("user")]);
@@ -212,7 +302,7 @@ class SessionHandler extends Controller
                         values(?,?,?,?,?,?,?,?,?)",[
                             $userId[0]->ID, $r->input("fromDate"), $r->input("toDate"), $r->input("position"), $r->input("department"), $r->input("salary"), $r->input("salarygrade"), $r->input("status"), $gov
                         ]);
-                        return "<script>window.location.href='/work/home'</script>";
+                        return "<script>window.location.href='/work'</script>";
         }else{
             return "<script>window.location.href='/logout'</script>";
         }
@@ -234,7 +324,7 @@ class SessionHandler extends Controller
                 DB::delete("delete from WORKEXPERIENCE
                             WHERE ID=? and FacultyID=?", [$id, $userId[0]->ID]);
             }
-            return "<script>window.location.href='/work/home'</script>";
+            return "<script>window.location.href='/work'</script>";
         }else{
             return "<script>window.location.href='/logout'</script>";
         }
@@ -247,7 +337,7 @@ class SessionHandler extends Controller
                         values(?,?,?,?,?,?,?)",[
                             $userId[0]->ID, $r->input("civil"), $r->input("rating"), $r->input("date"), $r->input("place"), $r->input("num"), $r->input("validity")
                         ]);
-                        return "<script>window.location.href='/civil/home'</script>";
+                        return "<script>window.location.href='/civil'</script>";
         }else{
             return "<script>window.location.href='/logout'</script>";
         }
@@ -266,7 +356,7 @@ class SessionHandler extends Controller
                 DB::delete("delete from CIVILSERVICE
                             WHERE ID=? and FacultyID=?", [$id, $userId[0]->ID]);
             }
-            return "<script>window.location.href='/civil/home'</script>";
+            return "<script>window.location.href='/civil'</script>";
         }else{
             return "<script>window.location.href='/logout'</script>";
         }
@@ -279,9 +369,9 @@ class SessionHandler extends Controller
                         values(?,?,?,?,?,?,?,?)",[
                             $userId[0]->ID, $r->input("school"), $r->input("course"), $r->input("fromDate"), $r->input("toDate"), $r->input("units"), $r->input("yearGrad"), $r->input("honors")
                         ]);
-                        return "<script>window.location.href='/home'</script>";
+                        return "<script>window.location.href='/college'</script>";
         }else{
-            return "<script>window.location.href='/college/logout'</script>";
+            return "<script>window.location.href='/logout'</script>";
         }
     }
     public function addGraduate(Request $r){
@@ -292,7 +382,7 @@ class SessionHandler extends Controller
                         values(?,?,?,?,?,?,?,?)",[
                             $userId[0]->ID, $r->input("school"), $r->input("course"), $r->input("fromDate"), $r->input("toDate"), $r->input("units"), $r->input("yearGrad"), $r->input("honors")
                         ]);
-                        return "<script>window.location.href='/graduate/home'</script>";
+                        return "<script>window.location.href='/graduate'</script>";
         }else{
             return "<script>window.location.href='/logout'</script>";
         }
@@ -311,7 +401,7 @@ class SessionHandler extends Controller
                 DB::delete("delete from GRADUATESTUDIES
                             WHERE ID=? and FacultyID=?", [$id, $userId[0]->ID]);
             }
-            return "<script>window.location.href='/graduate/home'</script>";
+            return "<script>window.location.href='/graduate'</script>";
         }else{
             return "<script>window.location.href='/logout'</script>";
         }
@@ -330,7 +420,7 @@ class SessionHandler extends Controller
                 DB::delete("delete from COLLEGES
                             WHERE ID=? and FacultyID=?", [$id, $userId[0]->ID]);
             }
-            return "<script>window.location.href='/college/home'</script>";
+            return "<script>window.location.href='/college'</script>";
         }else{
             return "<script>window.location.href='/logout'</script>";
         }
@@ -343,7 +433,7 @@ class SessionHandler extends Controller
                         values(?,?,?,?,?,?,?,?)",[
                             $userId[0]->ID, $r->input("school"), $r->input("course"), $r->input("fromDate"), $r->input("toDate"), $r->input("units"), $r->input("yearGrad"), $r->input("honors")
                         ]);
-                        return "<script>window.location.href='/vocational/home'</script>";
+                        return "<script>window.location.href='/vocational'</script>";
         }else{
             return "<script>window.location.href='/logout'</script>";
         }
@@ -363,7 +453,7 @@ class SessionHandler extends Controller
                 DB::delete("delete from VOCATIONALCOURSES
                             WHERE ID=? and FacultyID=?", [$id, $userId[0]->ID]);
             }
-            return "<script>window.location.href='/vocational/home'</script>";
+            return "<script>window.location.href='/vocational'</script>";
         }else{
             return "<script>window.location.href='/logout'</script>";
         }
