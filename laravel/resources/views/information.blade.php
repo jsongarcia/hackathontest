@@ -1,7 +1,7 @@
 <html>
     <head>
         <title>Information</title>
-        
+        <link rel="stylesheet" href="css/main.css">
     </head>
     <body>
         <div class="topbar">
