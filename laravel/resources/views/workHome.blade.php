@@ -18,53 +18,64 @@
                 <li><a href="/logout">Log Out</a></li>
             </ul>
         </div>
-<h3>ADD WORK EXPERIENCE</h3>
+<p><b>WORK EXPERIENCES</b></p>
+        @foreach($data as $record)
         <table>
-        <form action="/publishWork" method="POST">
+        <form action="/publishWork/{{$record->ID}}" method="POST">
             @csrf
             <tr>
                 <td>Inclusive Dates: </td>
             </tr>
             <tr>
                 <td>From: </td>
-                <td><input type="date" name="fromDate"></td>
+                <td><input type="date" name="fromDate" value="{{$record->FromDate}}"></td>
             </tr>
             <tr>
                 <td>To: </td>
-                <td><input type="date" name="toDate"></td>
+                <td><input type="date" name="toDate" value="{{$record->ToDate}}"></td>
             </tr>
             <tr>
                 <td>Position/Title: </td>
-                <td><input type="text" name="position"></td>
+                <td><input type="text" name="position" value="{{$record->Position}}"></td>
             </tr>
             <tr>
                 <td>Department/Agency/Office/Company: </td>
-                <td><input type="text" name="department"></td>
+                <td><input type="text" name="department" value="{{$record->Department}}"></td>
             </tr>
             <tr>
                 <td>Monthly Salary: </td>
-                <td><input type="text" name="salary"></td>
+                <td><input type="text" name="salary" value="{{$record->Salary}}"></td>
             </tr>
             <tr>
                 <td>Salary/Job/Pay Grade: </td>
-                <td><input type="text" name="salarygrade"></td>
+                <td><input type="text" name="salarygrade" value="{{$record->SalaryGrade}}"></td>
             </tr>
             <tr>
                 <td>Status of Appointment: </td>
-                <td><input type="text" name="status"></td>
+                <td><input type="text" name="status" value="{{$record->Status}}"></td>
             </tr>
             <tr>
                 <td>Government Service: </td>
                 <td>
+                @if($record->Government)
                 <select name="government">
-                    <option selected="selected" disabled></option>
-                    <option value="yes">Yes</option>
+                    <option value="yes" selected="selected">Yes</option>
                     <option value="no">No</option>
                 </select>
+                @else
+                <select name="government">
+                    <option value="yes">Yes</option>
+                    <option value="no" selected="selected">No</option>
+                </select>
+                @endif
                 </td>
             </tr>
         </table><br />
-        <input type="submit" value="Add Entry">
+        <input type="submit" name="action" value="Save Changes">
+        <input type="submit" name="action" value="Delete">
         </form>
+        @endforeach
+        <br /><br />
+        <button><a href="/work">Add Work Experience</a></button>
 </body>
 </html>

@@ -6,6 +6,18 @@
     <title>Document</title>
 </head>
 <body>
+<div class="topbar">
+            <ul>
+                <li><a href="/home">Personal Information</a></li>
+                <li><a href="/education/home">Education</a></li>
+                <li><a href="/vocational/home">Vocational/Trade Course</a></li>
+                <li><a href="/college/home">College</a></li>
+                <li><a href="/graduate/home">Graduate Studies</a></li>
+                <li><a href="/civil/home">Civil Service</a></li>
+                <li><a href="/work/home">Work Experience</a></li>
+                <li><a href="/logout">Log Out</a></li>
+            </ul>
+        </div>
 <h3>ADD COLLEGE </h3>
         <table>
         <form action="/publishCollege" method="POST">

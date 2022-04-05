@@ -18,17 +18,18 @@
                 <li><a href="/logout">Log Out</a></li>
             </ul>
         </div>
-<h3>ADD VOCATIONAL/TRADE COURSE </h3>
+<p><b>COLLEGES</b></p>
+        @foreach($data ?? [] as $record)
         <table>
-        <form action="/publishVocational" method="POST">
+        <form action="/publishCollege/{{$record->ID}}" method="POST">
             @csrf
             <tr>
                 <td>Name of School: </td>
-                <td><input type="text" name="school"></td>
+                <td><input type="text" name="school" value="{{$record->Name}}"></td>
             </tr>
             <tr>
                 <td>Basic Education/Degree/Course: </td>
-                <td><input type="text" name="course"></td>
+                <td><input type="text" name="course" value="{{$record->Course}}"></td>
             </tr>
             <tr>
                 <td colspan="2">Period of attendance  : </td>
@@ -36,26 +37,30 @@
             </tr>
             <tr>
                 <td>From: </td>
-                <td><input type="date" name="fromDate"></td>
+                <td><input type="date" name="fromDate" value="{{$record->FromDate}}"></td>
             </tr>
             <tr>
                 <td>To: </td>
-                <td><input type="date" name="toDate"></td>
+                <td><input type="date" name="toDate" value="{{$record->ToDate}}"></td>
             </tr>
             <tr>
                 <td>Highest Level/Units Earned (if not graduated):  </td>
-                <td><input type="text" name="units"></td>
+                <td><input type="text" name="units" value="{{$record->Units}}"></td>
             </tr>
             <tr>
                 <td>Year Graduated: </td>
-                <td><input type="date" name="yearGrad"></td>
+                <td><input type="date" name="yearGrad" value="{{$record->Year}}"></td>
             </tr>
             <tr>
                 <td>Scholarship/Academic Honors Received: </td>
-                <td><input type="text" name="honors"></td>
+                <td><input type="text" name="honors" value="{{$record->Honors}}"></td>
             </tr>
         </table><br />
-        <input type="submit" value="Add Entry">
+        <input type="submit" name="action" value="Save Changes">
+        <input type="submit" name="action" value="Delete">
         </form>
+        @endforeach
+        <br /><br />
+        <button><a href="/college">Add College</a></button>
 </body>
 </html>
