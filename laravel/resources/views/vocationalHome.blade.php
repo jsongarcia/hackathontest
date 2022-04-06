@@ -3,6 +3,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=1, initial-scale=1.0">
+    <link rel="stylesheet" href="css/main.css">
     <title>Document</title>
 </head>
 <body>
@@ -19,6 +20,7 @@
                 <li><a href="/logout">Log Out</a></li>
             </ul>
         </div>
+<div class="form">
 <p><b>VOCATIONAL COURSES</b></p>
         @foreach($data ?? [] as $record)
         <table>
@@ -62,5 +64,7 @@
         @endforeach
         <br/><br/>
         <button><a href="/vocational/addEntry">Add Vocational/Trade Course</a></button>
+</div>
+
 </body>
 </html>
