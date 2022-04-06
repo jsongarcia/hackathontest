@@ -22,42 +22,34 @@
 <p><b>GRADUATE STUDIES</b></p>
         @foreach($data ?? [] as $record)
         <table>
-        <form action="/publishGraduate/{{$record->ID}}" method="POST">
+        <form action="/editGraduate/{{$record->ID}}" method="GET">
             @csrf
             <tr>
                 <td>Name of School: </td>
-                <td><input type="text" name="school" value="{{$record->Name}}"></td>
+                <td>{{$record->Name}}</td>
             </tr>
             <tr>
                 <td>Basic Education/Degree/Course: </td>
-                <td><input type="text" name="course" value="{{$record->Course}}"></td>
+                <td>{{$record->Course}}</td>
             </tr>
             <tr>
-                <td colspan="2">Period of attendance  : </td>
-
+                <td>Period of attendance  : </td>
+                <td>{{date_create($record->FromDate)->format('m/d/Y')}} - {{date_create($record->ToDate)->format('m/d/Y')}}</td>
             </tr>
             <tr>
-                <td>From: </td>
-                <td><input type="date" name="fromDate" value="{{$record->FromDate}}"></td>
-            </tr>
-            <tr>
-                <td>To: </td>
-                <td><input type="date" name="toDate" value="{{$record->ToDate}}"></td>
-            </tr>
-            <tr>
-                <td>Highest Level/Units Earned (if not graduated):  </td>
-                <td><input type="text" name="units" value="{{$record->Units}}"></td>
+                <td>Highest Level/Units Earned:  </td>
+                <td>{{$record->Units}}</td>
             </tr>
             <tr>
                 <td>Year Graduated: </td>
-                <td><input type="date" name="yearGrad" value="{{$record->Year}}"></td>
+                <td>{{date_create($record->Year)->format('Y')}}</td>
             </tr>
             <tr>
                 <td>Scholarship/Academic Honors Received: </td>
-                <td><input type="text" name="honors" value="{{$record->Honors}}"></td>
+                <td>{{$record->Honors}}</td>
             </tr>
         </table><br />
-        <input type="submit" name="action" value="Save Changes">
+        <input type="submit" name="action" value="Edit Entry">
         </form>
         @endforeach
         <br /><br />

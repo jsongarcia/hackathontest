@@ -19,40 +19,44 @@
                 <li><a href="/logout">Log Out</a></li>
             </ul>
         </div>
-<p><b>CERTIFICATES</b></p>
+<p><b>CIVIL SERVICE</b></p>
         @foreach($data ?? [] as $record)
         <table>
-        <form action="/editCert/{{$record->ID}}" method="GET">
+        <form action="/publishCivil/{{$record->ID}}" method="POST">
             @csrf
             <tr>
-                <td>Title: </td>
-                <td>{{$record->Title}}</td>
+                <td>Civil Service Type: </td>
+                <td><input type="text" name="civil" value="{{$record->Service}}"></td>
             </tr>
             <tr>
-                <td>Type: </td>
-                <td>{{$record->Type}}</td>
+                <td>Rating: </td>
+                <td><input type="text" name="rating" value="{{$record->Rating}}"></td>
             </tr>
             <tr>
-                <td>Date of Attendance: </td>
-                <td>{{date_create($record->FromDate)->format('m/d/Y')}} - {{date_create($record->ToDate)->format('m/d/Y')}}</td>
+                <td>Date of Examination/Conferment: </td>
+                <td><input type="date" name="date" value="{{$record->ExamDate}}"></td>
             </tr>
             <tr>
-                <td>Number of Hours: </td>
-                <td>{{$record->Hours}}</td>
+                <td>Place of Examination/Confement: </td>
+                <td><input type="text" name="place" value="{{$record->ExamPlace}}"></td>
             </tr>
             <tr>
-                <td>Conducted/Sponsored By: </td>
-                <td>{{$record->Conducted}}</td>
+                <td>License (if applicable):  </td>
             </tr>
             <tr>
-                <td>Type of LD: </td>
-                <td>{{$record->LDType}}</td>
+                <td>License Number: </td>
+                <td><input type="text" name="num" value="{{$record->LicenseNo}}"></td>
+            </tr>
+            <tr>
+                <td>License validity: </td>
+                <td><input type="date" name="valid" value="{{$record->Validity}}"></td>
             </tr>
         </table><br />
-        <iframe src="certificates/{{$record->Certificate}}" height=200px width=300px></iframe><br />
-        <input type="submit" value="Edit Entry"><br /></form>
+        <br />
+        <input type="submit" name="action" value="Save Changes">
+        </form>
         @endforeach
         <br /><br />
-        <button><a href="/cert/addEntry">Add Certificate</a></button>
+        <button><a href="/civil/addEntry">Add Civil Service</a></button>
 </body>
 </html>
