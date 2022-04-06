@@ -10,7 +10,14 @@ class SessionHandler extends Controller
     public function index(Request $r){
         if(Session::has("user")){
             return "<script>window.location.href='/home'</script>";
+        }else if(Session::has("admin")){
+            return "<script>window.location.href='/admin'</script>";
         }else{
+            //check if admin
+            if($r->input('email')=="admin@admin" && $r->input('password')=="admin"){
+                Session::put("admin", "admin");
+                return "<script>window.location.href='/admin'</script>";
+            }else{
             if( $r->input('email') && $r->input('password')) {
                 $email = $r->input("email");
                 $pass = $r->input("password");
@@ -27,6 +34,7 @@ class SessionHandler extends Controller
             }else
             return view("login");
         }
+    }
     }
     public function toHome(){
         if(Session::has("user")){
