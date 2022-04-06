@@ -84,7 +84,7 @@ input[type=submit], button{
 }
 
 .topbar a, button a{
-    padding: 15px;
+    padding: 8px;
     color: white;
     text-decoration: none;
 }
