@@ -3,7 +3,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=1, initial-scale=1.0">
-    <link rel="stylesheet" href="css/main.css">
     <title>Document</title>
 </head>
 <body>
@@ -21,53 +20,44 @@
                 <li><a href="/logout">Log Out</a></li>
             </ul>
         </div>
-<div class="form">
-<p><b>WORK EXPERIENCES</b></p>
-        @foreach($data as $record)
+<p><b>CIVIL SERVICE</b></p>
+        @foreach($data ?? [] as $record)
         <table>
-        <form action="/editWork/{{$record->ID}}" method="GET">
+        <form action="/publishCivil/{{$record->ID}}" method="POST">
             @csrf
             <tr>
-                <td>Inclusive Dates: </td>
-                <td>{{date_create($record->FromDate)->format('m/d/Y')}} - {{date_create($record->ToDate)->format('m/d/Y')}}</td>
+                <td>Civil Service Type: </td>
+                <td><input type="text" name="civil" value="{{$record->Service}}"></td>
             </tr>
             <tr>
-                <td>Position/Title: </td>
-                <td>{{$record->Position}}</td>
+                <td>Rating: </td>
+                <td><input type="text" name="rating" value="{{$record->Rating}}"></td>
             </tr>
             <tr>
-                <td>Department/Agency/Office/Company: </td>
-                <td>{{$record->Department}}</td>
+                <td>Date of Examination/Conferment: </td>
+                <td><input type="date" name="date" value="{{$record->ExamDate}}"></td>
             </tr>
             <tr>
-                <td>Monthly Salary: </td>
-                <td>{{$record->Salary}}</td>
+                <td>Place of Examination/Confement: </td>
+                <td><input type="text" name="place" value="{{$record->ExamPlace}}"></td>
             </tr>
             <tr>
-                <td>Salary/Job/Pay Grade: </td>
-                <td>{{$record->SalaryGrade}}</td>
+                <td>License (if applicable):  </td>
             </tr>
             <tr>
-                <td>Status of Appointment: </td>
-                <td>{{$record->Status}}</td>
+                <td>License Number: </td>
+                <td><input type="text" name="num" value="{{$record->LicenseNo}}"></td>
             </tr>
             <tr>
-                <td>Government Service: </td>
-                <td>
-                @if($record->Government)
-                Yes
-                @else
-                No
-                @endif
-                </td>
+                <td>License validity: </td>
+                <td><input type="date" name="valid" value="{{$record->Validity}}"></td>
             </tr>
         </table><br />
-        <input type="submit" name="action" value="Edit Entry">
+        <br />
+        <input type="submit" name="action" value="Save Changes">
         </form>
         @endforeach
         <br /><br />
-        <button><a href="/work/addEntry">Add Work Experience</a></button>
-</div>
-
+        <button><a href="/civil/addEntry">Add Civil Service</a></button>
 </body>
 </html>

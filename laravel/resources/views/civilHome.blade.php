@@ -17,6 +17,7 @@
                 <li><a href="/civil">Civil Service</a></li>
                 <li><a href="/work">Work Experience</a></li>
                 <li><a href="/cert">Certifications</a></li>
+                <li><a href="/report">Generate Reports</a></li>
                 <li><a href="/logout">Log Out</a></li>
             </ul>
         </div>
@@ -24,38 +25,35 @@
 <p><b>CIVIL SERVICE</b></p>
         @foreach($data ?? [] as $record)
         <table>
-        <form action="/publishCivil/{{$record->ID}}" method="POST">
+        <form action="/editCivil/{{$record->ID}}" method="GET">
             @csrf
             <tr>
                 <td>Civil Service Type: </td>
-                <td><input type="text" name="civil" value="{{$record->Service}}"></td>
+                <td>{{$record->Service}}</td>
             </tr>
             <tr>
                 <td>Rating: </td>
-                <td><input type="text" name="rating" value="{{$record->Rating}}"></td>
+                <td>{{$record->Rating}}</td>
             </tr>
             <tr>
                 <td>Date of Examination/Conferment: </td>
-                <td><input type="date" name="date" value="{{$record->ExamDate}}"></td>
+                <td>{{date_create($record->ExamDate)->format('m/d/Y')}}</td>
             </tr>
             <tr>
                 <td>Place of Examination/Confement: </td>
-                <td><input type="text" name="place" value="{{$record->ExamPlace}}"></td>
-            </tr>
-            <tr>
-                <td>License (if applicable):  </td>
+                <td>{{$record->ExamPlace}}</td>
             </tr>
             <tr>
                 <td>License Number: </td>
-                <td><input type="text" name="num" value="{{$record->LicenseNo}}"></td>
+                <td>{{$record->LicenseNo}}</td>
             </tr>
             <tr>
                 <td>License validity: </td>
-                <td><input type="date" name="valid" value="{{$record->Validity}}"></td>
+                <td>{{date_create($record->Validity)->format('m/d/Y')}}</td>
             </tr>
         </table><br />
         <br />
-        <input type="submit" name="action" value="Save Changes">
+        <input type="submit" name="action" value="Edit entry">
         </form>
         @endforeach
         <br /><br />

@@ -3,9 +3,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=1, initial-scale=1.0">
-    <link rel="stylesheet" href="css/main.css">
     <title>Document</title>
-    
 </head>
 <body>
 <div class="topbar">
@@ -22,50 +20,50 @@
                 <li><a href="/logout">Log Out</a></li>
             </ul>
         </div>
-<div class = "form">
-<h3>ADD CERTIFICATION</h3>
+<p><b>CERTIFICATES</b></p>
+        @foreach($data ?? [] as $record)
         <table>
-        <form action="/publishCert" method="POST" enctype="multipart/form-data">
+        <form action="/publishCert/{{$record->ID}}" method="POST" enctype="multipart/form-data">
             @csrf
             <tr>
                 <td>Title: </td>
-                <td><input type="text" name="title"></td>
+                <td><input type="text" name="title" value="{{$record->Title}}"></td>
             </tr>
             <tr>
                 <td>Type: </td>
-                <td><input type="text" name="type"></td>
+                <td><input type="text" name="type" value="{{$record->Type}}"></td>
             </tr>
             <tr>
                 <td>Date of Attendance: </td>
             </tr>
             <tr>
                 <td>From</td>
-                <td><input type="date" name="fromDate" format="MM DD YYYY"></td>
+                <td><input type="date" name="fromDate"  value="{{$record->FromDate}}"></td>
             </tr>
             <tr>
                 <td>To</td>
-                <td><input type="date" name="toDate"></td>
+                <td><input type="date" name="toDate" value="{{$record->ToDate}}"></td>
             </tr>
             <tr>
                 <td>Number of Hours: </td>
-                <td><input type="text" name="hours"></td>
+                <td><input type="text" name="hours" value="{{$record->Hours}}"></td>
             </tr>
             <tr>
                 <td>Conducted/Sponsored By: </td>
-                <td><input type="text" name="conducted"></td>
+                <td><input type="text" name="conducted" value="{{$record->Conducted}}"></td>
             </tr>
             <tr>
                 <td>Type of LD: </td>
-                <td><input type="text" name="ldtype"></td>
+                <td><input type="text" name="ldtype" value="{{$record->LDType}}"></td>
             </tr>
             <tr>
-                <td>Certificate(IMG/PDF): </td>
+                <td>Certificate(IMG/PDF)<br />(<i>Leave blank if nothing to change</i>): </td>
                 <td><input type="file" name="upload" accept="image/*, application/pdf"></td>
             </tr>
         </table><br />
-        <input type="submit" value="Add Entry">
-        </form>
-</div>
-
+        <input type="submit" value="Save Changes"><br /></form>
+        @endforeach
+        <br /><br />
+        <button><a href="/cert/addEntry">Add Certificate</a></button>
 </body>
 </html>

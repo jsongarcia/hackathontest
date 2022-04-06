@@ -145,7 +145,7 @@ class SessionHandler extends Controller
             return "<script>window.location.href='/logout'</script>";
         }
     }
-    public function editCert(Request $req, $id){
+    public function publishCert(Request $req, $id){
         if(Session::get("user")){
         $userId = DB::select("select * from faculty WHERE ACTIVESESSION=?",[Session::get("user")]);
         //Get the profile pic first
@@ -202,6 +202,16 @@ class SessionHandler extends Controller
             return "<script>window.location.href='/logout'</script>";
         }
     }
+    public function editCert(Request $r, $id){
+        if(Session::has("user")){
+            $userId = DB::select("select * from faculty where ACTIVESESSION=?", [Session::get("user")]);
+            //Get the data
+            $data = DB::select("select * from CERTIFICATIONS where ID=?",[$id]);
+            return view("editCert", ['data'=>$data]);
+        }else{
+            return "<script>window.location.href='/logout'</script>";
+        }
+    }
     public function addCert(){
         if(Session::has("user")){
             return view("cert");
@@ -215,6 +225,16 @@ class SessionHandler extends Controller
             //Get the data
             $data = DB::select("select * from WORKEXPERIENCE where FacultyID=?",[$userId[0]->ID]);
             return view("workHome", ['data'=>$data]);
+        }else{
+            return "<script>window.location.href='/logout'</script>";
+        }
+    }
+    public function editWork(Request $r, $id){
+        if(Session::has("user")){
+            $userId = DB::select("select * from faculty where ACTIVESESSION=?", [Session::get("user")]);
+            //Get the data
+            $data = DB::select("select * from WORKEXPERIENCE where ID=?",[$id]);
+            return view("editWork", ['data'=>$data]);
         }else{
             return "<script>window.location.href='/logout'</script>";
         }
@@ -271,6 +291,16 @@ class SessionHandler extends Controller
             return "<script>window.location.href='/logout'</script>";
         }
     }
+    public function editCivil(Request $r, $id){
+        if(Session::has("user")){
+            $userId = DB::select("select * from faculty where ACTIVESESSION=?", [Session::get("user")]);
+            //Get the data
+            $data = DB::select("select * from CIVILSERVICE where ID=?",[$id]);
+            return view("editCivil", ['data'=>$data]);
+        }else{
+            return "<script>window.location.href='/logout'</script>";
+        }
+    }
     public function graduateHome(){
         if(Session::has("user")){
             $userId = DB::select("select * from faculty where ACTIVESESSION=?", [Session::get("user")]);
@@ -291,6 +321,16 @@ class SessionHandler extends Controller
             return "<script>window.location.href='/logout'</script>";
         }
     }
+    public function editCollege(Request $r, $id){
+        if(Session::has("user")){
+            $userId = DB::select("select * from faculty where ACTIVESESSION=?", [Session::get("user")]);
+            //Get the data
+            $data = DB::select("select * from COLLEGES where ID=?",[$id]);
+            return view("editCollege", ['data'=>$data]);
+        }else{
+            return "<script>window.location.href='/logout'</script>";
+        }
+    }
     public function addWork(Request $r){
         if(Session::has("user")){
             $userId = DB::select("select * from faculty WHERE ACTIVESESSION=?",[Session::get("user")]);
@@ -307,7 +347,7 @@ class SessionHandler extends Controller
             return "<script>window.location.href='/logout'</script>";
         }
     }
-    public function editWork(Request $r, $id){
+    public function publishWork(Request $r, $id){
         if(Session::has("user")){
             $userId = DB::select("select * from faculty WHERE ACTIVESESSION=?",[Session::get("user")]);
             $gov=0;
@@ -329,6 +369,27 @@ class SessionHandler extends Controller
             return "<script>window.location.href='/logout'</script>";
         }
     }
+    public function editPersonalInfo(){
+        //Get the user id
+        $userId = DB::select("select * from faculty where ACTIVESESSION=?", [Session::get("user")]);
+        //Get Personal Info
+        $personalInfo = DB::select("select * from PERSONALINFO where ID=?", [$userId[0]->ID]);
+        //get profilepicture
+        $profilePic = DB::select("select * from PROFILEPICTURES where ID=?", [$userId[0]->ID]);
+        return view("editPersonalInfo", ["info"=>$personalInfo, "profilePic"=>$profilePic]);
+    }
+    public function editEducation(){
+        $userId = DB::select("select * from faculty where ACTIVESESSION=?", [Session::get("user")]);
+            //Get the data
+            $data = DB::select("select * from EDUCATIONALBACKGROUND where ID=?",[$userId[0]->ID]);
+            return view("editEducation", ['data'=>$data]);
+    }
+    public function editVocational(Request $r, $id){
+        $userId = DB::select("select * from faculty where ACTIVESESSION=?", [Session::get("user")]);
+            //Get the data
+            $data = DB::select("select * from VOCATIONALCOURSES where ID=?",[$id]);
+            return view("editVocational", ['data'=>$data]);
+    }
     public function addCivil(Request $r){
         if(Session::has("user")){
             $userId = DB::select("select * from faculty WHERE ACTIVESESSION=?",[Session::get("user")]);
@@ -342,7 +403,7 @@ class SessionHandler extends Controller
             return "<script>window.location.href='/logout'</script>";
         }
     }
-    public function editCivil(Request $r, $id){
+    public function publishCivil(Request $r, $id){
         if(Session::has("user")){
             $userId = DB::select("select * from faculty WHERE ACTIVESESSION=?",[Session::get("user")]);
             if($r->input("action")=="Save Changes"){
@@ -387,7 +448,17 @@ class SessionHandler extends Controller
             return "<script>window.location.href='/logout'</script>";
         }
     }
-    public function editGraduate(Request $r, $id){
+    public function editGraduate(Request $r,$id){
+        if(Session::has("user")){
+            $userId = DB::select("select * from faculty where ACTIVESESSION=?", [Session::get("user")]);
+            //Get the data
+            $data = DB::select("select * from GRADUATESTUDIES where ID=?",[$id]);
+            return view("editGraduate", ['data'=>$data]);
+        }else{
+            return "<script>window.location.href='/logout'</script>";
+        }
+    }
+    public function publishGraduate(Request $r, $id){
         if(Session::has("user")){
             $userId = DB::select("select * from faculty WHERE ACTIVESESSION=?",[Session::get("user")]);
             if($r->input("action")=="Save Changes"){
@@ -406,7 +477,8 @@ class SessionHandler extends Controller
             return "<script>window.location.href='/logout'</script>";
         }
     }
-    public function editCollege(Request $r, $id){
+
+    public function publishCollege(Request $r, $id){
         if(Session::has("user")){
             $userId = DB::select("select * from faculty WHERE ACTIVESESSION=?",[Session::get("user")]);
             if($r->input("action")=="Save Changes"){
@@ -439,7 +511,7 @@ class SessionHandler extends Controller
         }
     }
 
-    public function editVocational(Request $r, $id){
+    public function publishVocational(Request $r, $id){
         if(Session::has("user")){
             $userId = DB::select("select * from faculty WHERE ACTIVESESSION=?",[Session::get("user")]);
             if($r->input("action")=="Save Changes"){
