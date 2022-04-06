@@ -1,3 +1,60 @@
+*{
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+h3, p{
+    padding: 10px;
+    text-align: center;
+    font-size: 30px;
+}
+
+.content{
+    text-align: center;
+}
+
 table{
-    border:1px solid black;border-radius:10px;padding:10px;
+    margin: auto;
+    border-radius: 12px;
+    border-color: black;
+    border: 10px;
+}
+
+input[type=text], input[type=date], input[type=file]{
+    padding: 10px 40px;
+    margin: 10px 5px;
+    border-radius: 12px;
+    
+}
+
+input[type=submit]{
+    background-color: rgba(116, 9, 9, 0.959);
+    padding: 10px 40px;
+    border-radius: 12px;
+    border-color: rgba(163, 18, 18, 0.959);
+    text-align: center;
+}
+
+
+.topbar{
+    overflow: hidden;
+    background-color: rgba(163, 18, 18, 0.959);
+    border-radius: 10px;
+    border-color: rgba(116, 9, 9, 0.959);
+    border-width: 20px;
+}
+
+.topbar li{
+    display: inline;
+    
+}
+
+.topbar a{
+    padding: 15px;
+    color: white;
+    text-decoration: none;
+}
+
+.topbar a:hover{
+    padding: 20px;
+    background-color: rgba(54, 16, 16, 0.959);
 }
