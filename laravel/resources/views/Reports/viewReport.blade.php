@@ -20,6 +20,7 @@
                 <li><a href="/logout">Log Out</a></li>
             </ul>
         </div>
+<div class="report">
     @if(count($perso)>0)
         <table>
             <caption> PERONAL INFORMATION </caption>
@@ -446,5 +447,6 @@
         </table><br />
         @endforeach
     @endif
+</div>
 </body>
 </html>

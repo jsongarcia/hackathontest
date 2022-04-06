@@ -48,6 +48,34 @@ h3, p{
     margin-top: 6%;
 }
 
+.form1{
+    border-color: black;
+    border-style: solid;
+    padding-top: 20px;
+    padding-left: 50px;
+    padding-bottom: 20px;
+    border-radius: 20px;
+    width: 35%;
+    margin: auto;
+    margin-top: 6%;
+}
+
+.report{
+    border-color: black;
+    border-style: solid;
+    padding-top: 20px;
+    padding-left: 50px;
+    padding-bottom: 20px;
+    width: 50%;
+    margin: auto;
+    margin-top: 6%;
+}
+
+
+.form1 ul{
+    list-style-type: none;
+}
+
 table{
     padding-top: 20px;
     padding-bottom: 20px;
@@ -66,6 +94,7 @@ input[type=text], input[type=date], input[type=file], input[type=password], sele
 input[type=submit], button{
     background-color: rgba(116, 9, 9, 0.959);
     padding: 10px 40px;
+    padding-top: 10px;
     border-radius: 12px;
     color: white;
     border-color: rgba(163, 18, 18, 0.959);
