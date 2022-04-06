@@ -21,6 +21,7 @@
                 <li><a href="/logout">Log Out</a></li>
             </ul>
         </div>
+<div class="form">
 <h3>EDUCATIONAL BACKGROUND: </h3>
         <table>
         <form action="/updateEducation" method="POST">
@@ -154,5 +155,6 @@
         </table><br />
         <input type="submit" value="Save Changes">
         </form>
+</div>
 </body>
 </html>

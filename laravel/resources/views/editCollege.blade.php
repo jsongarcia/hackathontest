@@ -21,6 +21,7 @@
                 <li><a href="/logout">Log Out</a></li>
             </ul>
         </div>
+<div class="form">
 <p><b>COLLEGES</b></p>
         @foreach($data ?? [] as $record)
         <table>
@@ -64,5 +65,6 @@
         @endforeach
         <br /><br />
         <button><a href="/college/addEntry">Add College</a></button>
+</div>
 </body>
 </html>
