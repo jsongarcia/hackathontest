@@ -3,6 +3,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/main.css">
     <title>Document</title>
 </head>
 <body>
@@ -20,7 +21,8 @@
                 <li><a href="/logout">Log Out</a></li>
             </ul>
         </div>
-    <form action="report/preview" method="GET">
+<div class="form1">
+<form action="report/preview" method="GET">
     <ul>
         <li><input type="checkbox" onclick="tickAll(this)">All Information</li>
         <ul>
@@ -45,5 +47,7 @@
             }
         }
     </script>
+</div>
+
 </body>
 </html>
