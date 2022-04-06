@@ -11,4 +11,8 @@ class AdminController extends Controller
             echo "Lol";
         }
     }
+    public function logout(){
+        Session::forget("admin");
+        return "<script>window.location.href='/'</script>";
+    }
 }
