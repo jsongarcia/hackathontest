@@ -66,3 +66,4 @@ Route::post("/publishCert", [SessionHandler::class, 'certAdd']);
 Route::post("/publishCert/{id}", [SessionHandler::class, 'publishCert']);
 
 Route::get("/report",[ReportHandler::class, 'report']);
+Route::get("/report/preview/", [ReportHandler::class, 'generateReport']);

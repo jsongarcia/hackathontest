@@ -19,31 +19,29 @@
             <li><a href="/logout">Log Out</a></li>
         </ul>
     </div>
+    <form action="report/preview" method="GET">
     <ul>
         <li><input type="checkbox" onclick="tickAll(this)">All Information</li>
         <ul>
             <li><input type="checkbox" name="personal">Personal Information</li>
-            <li><input type="checkbox" onclick="educ(this)">Education</li>
-            <ul>
-            <li><input type="checkbox" name="elem" id="el">Elementary school</li>
-            <li><input type="checkbox" name="second" id="se">Secondary school</li>
-            </ul>
+            <li><input type="checkbox" name="education">Education</li>
             <li><input type="checkbox" name="vocational" >Vocational/Trade Courses</li>
             <li><input type="checkbox" name="college" >College Courses</li>
+            <li><input type="checkbox" name="graduate" >Graduate Studies</li>
+            <li><input type="checkbox" name="civil" >Civil Services</li>
             <li><input type="checkbox" name="work" >Work Experience</li>
             <li><input type="checkbox" name="cert" >Certifications</li>
         </ul>
     </ul>
+    <input type="submit" value="Preview Information" name="action">
+    <input type="submit" value="Download Information" name="action">
+    </form>
 
     <script>
         function tickAll(element){
             for(var li of document.getElementsByTagName("input")){
                 li.checked=element.checked
             }
-        }
-        function educ(element){
-            document.getElementById("el").checked=element.checked
-            document.getElementById("se").checked=element.checked
         }
     </script>
 </body>
