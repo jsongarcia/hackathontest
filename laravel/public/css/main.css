@@ -67,6 +67,7 @@ input[type=submit], button{
     background-color: rgba(116, 9, 9, 0.959);
     padding: 10px 40px;
     border-radius: 12px;
+    color: white;
     border-color: rgba(163, 18, 18, 0.959);
     text-align: center;
 }
