@@ -27,7 +27,7 @@ input[type=text], input[type=date], input[type=file]{
 }
 
 input[type=submit]{
-    background-color: rgba(116, 9, 9, 0.959);;
+    background-color: rgba(116, 9, 9, 0.959);
     padding: 10px 40px;
     border-radius: 12px;
     border-color: rgba(163, 18, 18, 0.959);
