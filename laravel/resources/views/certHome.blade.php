@@ -52,7 +52,7 @@
                 <td>{{$record->LDType}}</td>
             </tr>
         </table><br />
-        <iframe src="certificates/{{$record->Certificate}}" style="width:80%;height:400px;"></iframe><br />
+        <iframe src="certificates/{{$record->Certificate}}"></iframe><br />
         <input type="submit" value="Edit Entry"><br /></form>
         @endforeach
         <br /><br />

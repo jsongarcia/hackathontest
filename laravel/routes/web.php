@@ -72,4 +72,7 @@ Route::get("/report/preview/", [ReportHandler::class, 'generateReport']);
 //ADMIN FUNCTIONS
 
 Route::get("/admin",[AdminController::class, 'index']);
+Route::get("/admin/info",[AdminController::class, 'info']);
+Route::get("/admin/info/generate",[AdminController::class, 'generate']);
+Route::get("/admin/activate/{id}",[AdminController::class, 'activate']);
 Route::get("/admin/logout",[AdminController::class, 'logout']);

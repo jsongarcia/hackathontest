@@ -4,6 +4,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
 <div class="topbar">
@@ -20,10 +21,10 @@
                 <li><a href="/logout">Log Out</a></li>
             </ul>
         </div>
-<div class="report">
+<div class="form">
     @if(count($perso)>0)
         <table>
-            <caption> PERONAL INFORMATION </caption>
+            <caption><b> PERSONAL INFORMATION </b></caption>
             <tr>
                 <td>Email Address:</td>
                 <td>{{  DB::select('select * from faculty where ID=?',[$perso[0]->ID])[0]->USERNAME   }}</td>
@@ -173,10 +174,11 @@
 
 
     @if(count($educ)>0)
+    <hr />
     <table>
-        <caption>EDUCATIONAL BACKGROUND</caption>
+        <caption><b>EDUCATIONAL BACKGROUND</b></caption>
             <tr>
-                <td colspan="2"><b>Elementary</b></td>
+                <td colspan="2">Elementary</td>
             </tr>
             <tr>
                 <td>Name of School: </td>
@@ -203,7 +205,7 @@
                 <td>{{$educ[0]->ElemHonors}}</td>
             </tr>
             <tr>
-                <td colspan="2"><b>Secondary</b></td>
+                <td colspan="2">Secondary</td>
             </tr>
             <tr>
                 <td>Name of School: </td>
@@ -234,9 +236,12 @@
 
 
     @if(count($voc)>0)
+    <hr />
+    <table>
+    <caption><b>VOCATIONAL COURSE<b></caption>
+    </table>
     @foreach($voc ?? [] as $record)
         <table>
-            <caption>VOCATIONAL COURSE</caption>
             <tr>
                 <td>Name of School: </td>
                 <td>{{$record->Name}}</td>
@@ -268,9 +273,12 @@
 
 
     @if(count($coll)>0)
+    <hr />
+    <table>
+    <caption><b>COLLEGE COURSE<b></caption>
+    </table>
     @foreach($coll ?? [] as $record)
         <table>
-            <caption>COLLEGE COURSE</caption>
             <tr>
                 <td>Name of School: </td>
                 <td>{{$record->Name}}</td>
@@ -296,15 +304,18 @@
                 <td>{{$record->Honors}}</td>
             </tr>
         </table><br />
-        </form>
         @endforeach
     @endif
 
 
     @if(count($grad)>0)
+    <hr />
+    <table>
+    <caption><b>GRADUATE STUDY COURSE</b></caption>
+    </table>
     @foreach($grad ?? [] as $record)
         <table>
-            <caption>GRADUATE STUDY COURSE</caption>
+            
             <tr>
                 <td>Name of School: </td>
                 <td>{{$record->Name}}</td>
@@ -330,14 +341,16 @@
                 <td>{{$record->Honors}}</td>
             </tr>
         </table><br />
-        </form>
         @endforeach
     @endif
 
     @if(count($civil)>0)
+    <hr />
+    <table>
+    <caption><b>CIVIL SERVICE</b></caption>
+    </table>
     @foreach($civil ?? [] as $record)
         <table>
-            <caption>CIVIL SERVICE</caption>
             <tr>
                 <td>Civil Service Type: </td>
                 <td>{{$record->Service}}</td>
@@ -370,9 +383,12 @@
 
 
     @if(count($work)>0)
+    <hr />
+    <table>
+    <caption><b>WORK EXPERIENCE</b></caption>
+    </table>
     @foreach($work as $record)
         <table>
-            <caption>WORK EXPERIENCE</caption>
             <tr>
                 <td>Inclusive Dates: </td>
                 <td>{{date_create($record->FromDate)->format('m/d/Y')}} - {{date_create($record->ToDate)->format('m/d/Y')}}</td>
@@ -414,9 +430,12 @@
 
 
     @if(count($cert)>0)
+    <hr />
+    <table>
+    <caption><b>CERTIFICATES</b></caption>
+    </table>
     @foreach($cert ?? [] as $record)
         <table>
-            <caption> CERTIFICATE </caption>
             <tr>
                 <td>Title: </td>
                 <td>{{$record->Title}}</td>
@@ -442,7 +461,7 @@
                 <td>{{$record->LDType}}</td>
             </tr>
             <tr>
-                <td colspan='2'><iframe src="/certificates/{{$record->Certificate}}" height=200px width=300px></iframe></td>
+                <td colspan='2'><iframe src="/certificates/{{$record->Certificate}}"></iframe></td>
             </tr>
         </table><br />
         @endforeach
