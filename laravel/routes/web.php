@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\SessionHandler;
 use App\Http\Controllers\ReportHandler;
+use App\Http\Controllers\AdminController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -67,3 +68,8 @@ Route::post("/publishCert/{id}", [SessionHandler::class, 'publishCert']);
 
 Route::get("/report",[ReportHandler::class, 'report']);
 Route::get("/report/preview/", [ReportHandler::class, 'generateReport']);
+
+//ADMIN FUNCTIONS
+
+Route::get("/admin",[AdminController::class, 'index']);
+Route::get("/admin/logout",[AdminController::class, 'logout']);
