@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=1, initial-scale=1.0">
     <link rel="stylesheet" href="css/main.css">
     <title>Document</title>
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
 <div class="topbar">
