@@ -1,8 +1,10 @@
 <html>
     <head>
         <title>Register Page</title>
+        <link rel="stylesheet" href="css/main.css">
     </head>
     <body>
+        <div class="login">
         <h1>Register Page</h1>
         @if(isset($msg))
             <p>{{$msg}}</p>
@@ -15,5 +17,6 @@
         <input type="submit" value="Register"><br>
         </form>
         <a href = "/">Have an account? <b>Login</b></a>
+        </div>
     </body>
 </html>

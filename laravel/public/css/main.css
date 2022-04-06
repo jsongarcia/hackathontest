@@ -12,28 +12,64 @@ h3, p{
     text-align: center;
 }
 
-table{
-    margin: auto;
-    border-radius: 12px;
+.login{
+    text-align: center;
     border-color: black;
-    border: 10px;
+    border-style: solid;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-radius: 20px;
+    width: 30%;
+    margin: auto;
+    margin-top: 6%;
 }
 
-input[type=text], input[type=date], input[type=file]{
+.login a{
+    padding: 15px;
+    color: rgba(116, 9, 9, 0.959);
+    text-decoration: none;
+}
+
+.login a:hover{
+    padding: 15px;
+    color: rgba(163, 18, 18, 0.959);
+    text-decoration: none;
+}
+
+.form{
+    text-align: center;
+    border-color: black;
+    border-style: solid;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-radius: 20px;
+    width: 50%;
+    margin: auto;
+    margin-top: 6%;
+}
+
+table{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-radius: 20px;
+    width: 30%;
+    margin: auto;
+    margin-top: 6%;
+}
+
+input[type=text], input[type=date], input[type=file], input[type=password], select{
     padding: 10px 40px;
     margin: 10px 5px;
     border-radius: 12px;
-    
 }
 
-input[type=submit]{
+input[type=submit], button{
     background-color: rgba(116, 9, 9, 0.959);
     padding: 10px 40px;
     border-radius: 12px;
     border-color: rgba(163, 18, 18, 0.959);
     text-align: center;
 }
-
 
 .topbar{
     overflow: hidden;
@@ -45,11 +81,10 @@ input[type=submit]{
 
 .topbar li{
     display: inline;
-    
 }
 
-.topbar a{
-    padding: 15px;
+.topbar a, button a{
+    padding: 8px;
     color: white;
     text-decoration: none;
 }
@@ -58,3 +93,4 @@ input[type=submit]{
     padding: 20px;
     background-color: rgba(54, 16, 16, 0.959);
 }
+

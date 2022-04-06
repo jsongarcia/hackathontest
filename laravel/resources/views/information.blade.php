@@ -18,6 +18,7 @@
                 <li><a href="/logout">Log Out</a></li>
             </ul>
         </div>
+        <div class="form">
         <h2>INFORMATION STATUS</h2>
         <h3>FACULTY PROFILE PERSONAL INFORMATION: </h3>
         <form action="/editPersonalInfo" method="GET">
@@ -177,5 +178,7 @@
         
         </table>
         </form>
+    </div>
+        
     </body>
 </html>

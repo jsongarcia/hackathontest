@@ -3,6 +3,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=1, initial-scale=1.0">
+    <link rel="stylesheet" href="css/main.css">
     <title>Document</title>
     <link rel="stylesheet" href="css/main.css">
 </head>
@@ -21,6 +22,7 @@
                 <li><a href="/logout">Log Out</a></li>
             </ul>
         </div>
+<div class="form">
 <h3>EDUCATIONAL BACKGROUND: </h3>
         <table>
         <form action="/editEducation" method="GET">
@@ -82,5 +84,7 @@
         </table><br />
         <input type="submit" value="Edit Education">
         </form>
+</div>
+
 </body>
 </html>

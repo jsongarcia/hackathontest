@@ -3,6 +3,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=1, initial-scale=1.0">
+    <link rel="stylesheet" href="css/main.css">
     <title>Document</title>
 </head>
 <body>
@@ -20,6 +21,7 @@
                 <li><a href="/logout">Log Out</a></li>
             </ul>
         </div>
+<div class="form">
 <h3>ADD COLLEGE </h3>
         <table>
         <form action="/publishCollege" method="POST">
@@ -59,5 +61,6 @@
         </table><br />
         <input type="submit" value="Add Entry">
         </form>
+</div>
 </body>
 </html>

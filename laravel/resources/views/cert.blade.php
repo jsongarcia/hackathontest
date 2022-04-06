@@ -3,8 +3,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=1, initial-scale=1.0">
+    <link rel="stylesheet" href="css/main.css">
     <title>Document</title>
-    <link rel="stylesheet" href="app.css">
+    
 </head>
 <body>
 <div class="topbar">
@@ -21,6 +22,7 @@
                 <li><a href="/logout">Log Out</a></li>
             </ul>
         </div>
+<div class = "form">
 <h3>ADD CERTIFICATION</h3>
         <table>
         <form action="/publishCert" method="POST" enctype="multipart/form-data">
@@ -63,5 +65,7 @@
         </table><br />
         <input type="submit" value="Add Entry">
         </form>
+</div>
+
 </body>
 </html>
