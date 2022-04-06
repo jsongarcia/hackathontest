@@ -3,6 +3,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=1, initial-scale=1.0">
+    <link rel="stylesheet" href="css/main.css">
     <title>Document</title>
 </head>
 <body>
@@ -13,7 +14,9 @@
             <li><a href='/admin/logout'>Log out</a></li>
         </ul>
     </div>
+    <div class="faculty">
     <form action="/admin/info/generate" method="GET">
+    <div class="info">
     <input type="submit" value="View Information">
     <ul>
         <li><input type="checkbox" onclick="tickAll(this)">All Information</li>
@@ -28,6 +31,7 @@
             <li><input type="checkbox" name="cert" >Certifications</li>
         </ul>
     </ul>
+</div>
     <table>
         <tr>
             <td><input type="checkbox" onclick="tickFaculty(this)"></td>
@@ -58,6 +62,8 @@
                 }
             }
         }
+
     </script>
+    </div>
 </body>
 </html>

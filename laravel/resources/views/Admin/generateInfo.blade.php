@@ -3,6 +3,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=1, initial-scale=1.0">
+    <link rel="stylesheet" href="css/main.css">
     <title>Document</title>
 </head>
 <body>
@@ -13,11 +14,13 @@
             <li><a href='/admin/logout'>Log out</a></li>
         </ul>
     </div>
+    
         @foreach($fac as $user)
         <hr />
         <label>Showing Information for: {{  DB::select('select * from faculty where ID=?',[$user])[0]->USERNAME   }}</label>
             @foreach($perso as $record)
                 @if($user==$record->ID)
+    <div class="report">
                     <table>
                     <caption><b> PERSONAL INFORMATION </b></caption>
                     <tr>
@@ -473,5 +476,6 @@
             @endif
             @endforeach
             @endforeach
+</div>
 </body>
 </html>

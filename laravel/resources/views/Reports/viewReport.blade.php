@@ -21,7 +21,7 @@
                 <li><a href="/logout">Log Out</a></li>
             </ul>
         </div>
-<div class="form">
+<div class="report">
     @if(count($perso)>0)
         <table>
             <caption><b> PERSONAL INFORMATION </b></caption>
