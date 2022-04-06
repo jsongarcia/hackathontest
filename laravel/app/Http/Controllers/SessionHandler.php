@@ -14,7 +14,7 @@ class SessionHandler extends Controller
             if( $r->input('email') && $r->input('password')) {
                 $email = $r->input("email");
                 $pass = $r->input("password");
-                $res = DB::select("faculty where USERNAME=? and PASSWORD=?",[$email, $pass]);
+                $res = DB::select("select * from faculty where USERNAME=? and PASSWORD=?",[$email, $pass]);
                 if(count($res)==1){ //There's a match!
                     //Make a session for the user
                     $sessionKey = md5(time().$email);

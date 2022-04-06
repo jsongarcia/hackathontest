@@ -16,6 +16,7 @@
                 <li><a href="/civil">Civil Service</a></li>
                 <li><a href="/work">Work Experience</a></li>
                 <li><a href="/cert">Certifications</a></li>
+                <li><a href="/report">Generate Reports</a></li>
                 <li><a href="/logout">Log Out</a></li>
             </ul>
         </div>

@@ -4,7 +4,7 @@
         <link rel="stylesheet" href="css/main.css">
     </head>
     <body>
-        <div class="topbar">
+    <div class="topbar">
             <ul>
                 <li><a href="/home">Personal Information</a></li>
                 <li><a href="/education">Education</a></li>

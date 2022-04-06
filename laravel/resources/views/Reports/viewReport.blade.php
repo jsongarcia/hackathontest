@@ -6,19 +6,20 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="topbar">
-        <ul>
-            <li><a href="/home">Personal Information</a></li>
-            <li><a href="/education">Education</a></li>
-            <li><a href="/vocational">Vocational/Trade Course</a></li>
-            <li><a href="/college">College</a></li>
-            <li><a href="/graduate">Graduate Studies</a></li>
-            <li><a href="/civil">Civil Service</a></li>
-            <li><a href="/work">Work Experience</a></li>
-            <li><a href="/cert">Certifications</a></li>
-            <li><a href="/logout">Log Out</a></li>
-        </ul>
-    </div>
+<div class="topbar">
+            <ul>
+                <li><a href="/home">Personal Information</a></li>
+                <li><a href="/education">Education</a></li>
+                <li><a href="/vocational">Vocational/Trade Course</a></li>
+                <li><a href="/college">College</a></li>
+                <li><a href="/graduate">Graduate Studies</a></li>
+                <li><a href="/civil">Civil Service</a></li>
+                <li><a href="/work">Work Experience</a></li>
+                <li><a href="/cert">Certifications</a></li>
+                <li><a href="/report">Generate Reports</a></li>
+                <li><a href="/logout">Log Out</a></li>
+            </ul>
+        </div>
     @if(count($perso)>0)
         <table>
             <caption> PERONAL INFORMATION </caption>
