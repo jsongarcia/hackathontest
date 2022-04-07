@@ -7,6 +7,7 @@
     <title>Document</title>
 </head>
 <body>
+    @if($action=="View")
     <div class="topbar">
         <ul>
             <li><a href='/admin'>Accept Faculties</a></li>
@@ -14,7 +15,7 @@
             <li><a href='/admin/logout'>Log out</a></li>
         </ul>
     </div>
-    
+    @endif
         @foreach($fac as $user)
         <hr />
         <center><h3>Showing Information for: {{  DB::select('select * from faculty where ID=?',[$user])[0]->USERNAME   }}</h3></center>
@@ -33,7 +34,7 @@
                     </tr>
                     <tr>
                         <td>Employee Name: </td>
-                        <td>{{$record->FName}} {{$record->MName}}. {{$record->LName}}</td>
+                        <td>{{$record->FName}} {{$record->MName}} @if($record->MName) . @endif  {{$record->LName}} {{$record->Extension}}</td>
                     </tr>
                     <tr>
                         <td>Date of Birth: </td>
@@ -186,7 +187,9 @@
                         </tr>
                         <tr>
                             <td>Period of attendance: </td>
+                            @if($record->ElemFrom && $record->ElemTo)
                             <td>{{date_create($record->ElemFrom)->format('m/d/Y')}} - {{date_create($record->ElemTo)->format('m/d/Y')}}</td>
+                            @endif
                         </tr>
                         <tr>
                             <td>Highest Level/Units Earned:  </td>
@@ -194,7 +197,9 @@
                         </tr>
                         <tr>
                             <td>Year Graduated: </td>
+                            @if($record->ElemYearGrad)
                             <td>{{date_create($record->ElemYearGrad)->format('Y')}}</td>
+                            @endif
                         </tr>
                         <tr>
                             <td>Scholarship/Academic Honors Received: </td>
@@ -213,7 +218,9 @@
                         </tr>
                         <tr>
                             <td>Period of attendance  : </td>
+                            @if($record->SecondFrom && $record->SecondTo)
                             <td>{{date_create($record->SecondFrom)->format('m/d/Y')}} - {{date_create($record->SecondTo)->format('m/d/Y')}}</td>
+                            @endif
                         </tr>
                         <tr>
                             <td>Highest Level/Units Earned:  </td>
@@ -221,7 +228,9 @@
                         </tr>
                         <tr>
                             <td>Year Graduated: </td>
+                            @if($record->SecondYearGrad)
                             <td>{{date_create($record->SecondYearGrad)->format('Y')}}</td>
+                            @endif
                         </tr>
                         <tr>
                             <td>Scholarship/Academic Honors Received: </td>
@@ -484,5 +493,9 @@
 </div>
             @endforeach
 </div>
+
+@if($action=="Download")
+    <script>window.print()</script>
+@endif
 </body>
 </html>

@@ -44,7 +44,9 @@
             </tr>
             <tr>
                 <td>Date of Birth: </td>
+                @if($info[0]->Birthdate)
                 <td>{{date_create($info[0]->Birthdate)->format("m/d/Y")}}</td>
+                @endif
             </tr>
             <tr>
                 <td>Age: </td>

@@ -7,7 +7,9 @@
     <title>Document</title>
 </head>
 <body>
+
 <div class="topbar">
+       
             <ul>
                 <li><a href="/home">Personal Information</a></li>
                 <li><a href="/education">Education</a></li>
@@ -21,6 +23,7 @@
                 <li><a href="/logout">Log Out</a></li>
             </ul>
         </div>
+
 <div class="form1">
 <form action="report/preview" method="GET">
     <ul>
@@ -48,6 +51,7 @@
         }
     </script>
 </div>
-
+        
 </body>
 </html>
+

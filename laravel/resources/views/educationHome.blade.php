@@ -40,7 +40,9 @@
             </tr>
             <tr>
                 <td>Period of attendance: </td>
+                @if($data[0]->ElemFrom && $data[0]->ElemTo)
                 <td>{{date_create($data[0]->ElemFrom)->format('m/d/Y')}} - {{date_create($data[0]->ElemTo)->format('m/d/Y')}}</td>
+                @endif
             </tr>
             <tr>
                 <td>Highest Level/Units Earned:  </td>
@@ -48,7 +50,9 @@
             </tr>
             <tr>
                 <td>Year Graduated: </td>
+                @if($data[0]->ElemYearGrad)
                 <td>{{date_create($data[0]->ElemYearGrad)->format('Y')}}</td>
+                @endif
             </tr>
             <tr>
                 <td>Scholarship/Academic Honors Received: </td>
@@ -67,7 +71,10 @@
             </tr>
             <tr>
                 <td>Period of attendance  : </td>
+                @if($data[0]->SecondFrom && $data[0]->SecondTo)
                 <td>{{date_create($data[0]->SecondFrom)->format('m/d/Y')}} - {{date_create($data[0]->SecondTo)->format('m/d/Y')}}</td>
+                @endif
+               
             </tr>
             <tr>
                 <td>Highest Level/Units Earned:  </td>
@@ -75,7 +82,10 @@
             </tr>
             <tr>
                 <td>Year Graduated: </td>
+                @if($data[0]->SecondYearGrad)
                 <td>{{date_create($data[0]->SecondYearGrad)->format('Y')}}</td>
+                @endif
+                
             </tr>
             <tr>
                 <td>Scholarship/Academic Honors Received: </td>

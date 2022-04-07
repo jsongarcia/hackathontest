@@ -50,7 +50,7 @@
     </table>
 </div>
 
-    <center><input type="submit" value="View Information" style="margin-top:20px;"></center>
+    <center><input type="submit" value="View Information" style="margin:20px;" name="action"><input type="submit" value="Download Information" style="margin:20px;" name="action"></center>
     </form>
 
     <script>

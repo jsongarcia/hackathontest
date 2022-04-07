@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
+    @if($action=="View")
 <div class="topbar">
             <ul>
                 <li><a href="/home">Personal Information</a></li>
@@ -21,6 +22,7 @@
                 <li><a href="/logout">Log Out</a></li>
             </ul>
         </div>
+    @endif
 <div class="report">
     @if(count($perso)>0)
         <table class="infoTable">
@@ -39,7 +41,9 @@
             </tr>
             <tr>
                 <td>Date of Birth: </td>
+                @if($perso[0]->Birthdate)
                 <td>{{date_create($perso[0]->Birthdate)->format("m/d/Y")}}</td>
+                @endif
             </tr>
             <tr>
                 <td>Age: </td>
@@ -190,7 +194,9 @@
             </tr>
             <tr>
                 <td>Period of attendance: </td>
+                @if($educ[0]->ElemFrom && $educ[0]->ElemTo)
                 <td>{{date_create($educ[0]->ElemFrom)->format('m/d/Y')}} - {{date_create($educ[0]->ElemTo)->format('m/d/Y')}}</td>
+                @endif
             </tr>
             <tr>
                 <td>Highest Level/Units Earned:  </td>
@@ -198,7 +204,9 @@
             </tr>
             <tr>
                 <td>Year Graduated: </td>
+                @if($educ[0]->ElemYearGrad)
                 <td>{{date_create($educ[0]->ElemYearGrad)->format('Y')}}</td>
+                @endif
             </tr>
             <tr>
                 <td>Scholarship/Academic Honors Received: </td>
@@ -217,7 +225,9 @@
             </tr>
             <tr>
                 <td>Period of attendance  : </td>
+                @if($educ[0]->SecondFrom && $educ[0]->SecondTo)
                 <td>{{date_create($educ[0]->SecondFrom)->format('m/d/Y')}} - {{date_create($educ[0]->SecondTo)->format('m/d/Y')}}</td>
+                @endif
             </tr>
             <tr>
                 <td>Highest Level/Units Earned:  </td>
@@ -225,7 +235,9 @@
             </tr>
             <tr>
                 <td>Year Graduated: </td>
+                @if($educ[0]->SecondYearGrad)
                 <td>{{date_create($educ[0]->SecondYearGrad)->format('Y')}}</td>
+                @endif
             </tr>
             <tr>
                 <td>Scholarship/Academic Honors Received: </td>
@@ -467,5 +479,9 @@
         @endforeach
     @endif
 </div>
+
+@if($action=="Download")
+        <script>window.print()</script>
+        @endif
 </body>
 </html>

@@ -31,6 +31,7 @@ class ReportHandler extends Controller
         $cert = DB::select("select * from CERTIFICATIONS where FacultyID=?",[$userId[0]->ID]);
         
         return view('Reports.viewReport',[
+            'action'=>($r->action=="Preview Information")?"View":"Download",
             'perso'=>($r->personal=="on")?$perso:[],
             'educ'=>($r->education=="on")?$educ:[],
             'voc'=>($r->vocational=="on")?$voc:[],

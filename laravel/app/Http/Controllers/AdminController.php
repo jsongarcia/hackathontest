@@ -45,6 +45,7 @@ class AdminController extends Controller
         $cert = DB::select("select * from CERTIFICATIONS");
         $fac = $r->input("faculty");
         return view('Admin.generateInfo',[
+            'action'=>($r->action=="View Information")?"View":"Download",
             'perso'=>($r->personal=="on")?$perso:[],
             'educ'=>($r->education=="on")?$educ:[],
             'voc'=>($r->vocational=="on")?$voc:[],
