@@ -54,7 +54,7 @@ class AdminController extends Controller
             'civil'=>($r->civil=="on")?$civil:[],
             'work'=>($r->work=="on")?$work:[],
             'cert'=>($r->cert=="on")?$cert:[],
-            'fac'=>(count($fac)>0)?$fac:[]
+            'fac'=>$fac
         ]);
     }
     public function logout(){

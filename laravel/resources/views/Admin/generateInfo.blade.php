@@ -17,7 +17,7 @@
         </ul>
     </div>
     @endif
-        @foreach($fac as $user)
+        @foreach($fac ?? [] as $user)
         <div class="report">
         <center><h3>Showing Information for: {{  DB::select('select * from faculty where ID=?',[$user])[0]->USERNAME   }}</h3></center>
             @foreach($perso as $record)
