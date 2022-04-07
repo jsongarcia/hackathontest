@@ -9,8 +9,9 @@
 <body>
     <div class="topbar">
         <ul>
-            <li><a href='/admin'>Accept Faculties</a></li>
+        <li><a href='/admin'>Accept Faculties</a></li>
             <li><a href='/admin/info'>View/Download Information</a></li>
+            <li><a href='/admin/info/update'>Update Faculty Information</a></li>
             <li><a href='/admin/logout'>Log out</a></li>
         </ul>
     </div>
@@ -40,10 +41,10 @@
             <td class="collapseTd">Employee ID</td>
             <td class="collapseTd">Employee Username</td>
         </tr>
-
+        
         @foreach($faculty as $record)
         <tr>
-            <td class="collapseTd"><input type="checkbox" name="faculty[]" value="{{$record->ID}}"></td>
+            <td class="collapseTd"><input type="checkbox" name="faculty[]"></td>
             <td class="collapseTd">{{$record->ID}}</td>
             <td class="collapseTd">{{$record->USERNAME}}</td>
         @endforeach

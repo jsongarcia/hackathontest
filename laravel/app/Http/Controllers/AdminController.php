@@ -61,4 +61,77 @@ class AdminController extends Controller
         Session::forget("admin");
         return "<script>window.location.href='/'</script>";
     }
+
+    public function updateInfos(){
+        $faculty = DB::select("select * from faculty");
+        return view("Admin.updateFaculty", ['faculty'=>$faculty]);
+    }
+    public function getInfo(Request $r){
+        $facultyID = $r->target;
+        $action = $r->action;
+
+        //Get Personal Info
+        $perso = DB::select("select * from PERSONALINFO where ID=?", [$facultyID]);
+        $profilePic = DB::select("select * from PROFILEPICTURES where ID=?", [$facultyID]);
+        //Get Educational Bg
+        $educ = DB::select("select * from EDUCATIONALBACKGROUND where ID=?", [$facultyID]);
+        //Get Vocational
+        $voc = DB::select("select * from VOCATIONALCOURSES where FacultyID=?", [$facultyID]);
+        //Get College
+        $coll = DB::select("select * from COLLEGES where FacultyID=?", [$facultyID]);
+        //Get Graduate
+        $grad = DB::select("select * from GRADUATESTUDIES where FacultyID=?", [$facultyID]);
+        //Get Civil
+        $civil = DB::select("select * from CIVILSERVICE where FacultyID=?", [$facultyID]);
+        //Get work Exp
+        $work = DB::select("select * from WORKEXPERIENCE where FacultyID=?", [$facultyID]);
+        //Get Certs
+        $cert = DB::select("select * from CERTIFICATIONS where FacultyID=?", [$facultyID]);
+
+        if($action=="Personal Information"){
+            return view("Admin.updater", ['info'=>$perso, 'profilePic'=>$profilePic]);
+        }
+        if($action=="Education"){
+            $userId = $facultyID;
+            $data = DB::select("select * from EDUCATIONALBACKGROUND where ID=?",[$userId]);
+            return view("Admin.updater", ['data'=>$data]);
+        }
+        if($action=="Vocational/Trade Course"){
+            $userId = $facultyID;
+            //Get the data
+            $data = DB::select("select * from VOCATIONALCOURSES where FacultyID=?",[$userId]);
+            return view("Admin.updater", ['vocational'=>$data]);
+        }
+        if($action=="College"){
+            $userId = $facultyID;
+            //Get the data
+            $data = DB::select("select * from COLLEGES where FacultyID=?",[$userId]);
+            return view("Admin.updater", ['college'=>$data]);
+        }
+        if($action=="Graduate Studies"){
+            $userId = $facultyID;
+            //Get the data
+            $data = DB::select("select * from GRADUATESTUDIES where FacultyID=?",[$userId]);
+            return view("Admin.updater", ['graduate'=>$data]);
+        }
+        if($action=="Civil Service"){
+            $userId = $facultyID;
+            //Get the data
+            $data = DB::select("select * from CIVILSERVICE where FacultyID=?",[$userId]);
+            return view("Admin.updater", ['civil'=>$data]);
+        }
+        if($action=="Work Experience"){
+            $userId = $facultyID;
+            //Get the data
+            $data = DB::select("select * from WORKEXPERIENCE where FacultyID=?",[$userId]);
+            return view("Admin.updater", ['work'=>$data]);
+        }
+        if($action=="Certifications"){
+            $userId = $facultyID;
+            //Get the data
+            $data = DB::select("select * from CERTIFICATIONS where FacultyID=?",[$userId]);
+            return view("Admin.updater", ['cert'=>$data]);
+        }
+    }
+
 }

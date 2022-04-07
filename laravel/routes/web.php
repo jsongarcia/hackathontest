@@ -76,3 +76,6 @@ Route::get("/admin/info",[AdminController::class, 'info']);
 Route::get("/admin/info/generate",[AdminController::class, 'generate']);
 Route::get("/admin/activate/{id}",[AdminController::class, 'activate']);
 Route::get("/admin/logout",[AdminController::class, 'logout']);
+
+Route::get("/admin/info/update",[AdminController::class, 'updateInfos']);
+Route::get("/admin/info/update/get",[AdminController::class, 'getInfo']);

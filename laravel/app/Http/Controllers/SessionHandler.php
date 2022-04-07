@@ -100,6 +100,20 @@ class SessionHandler extends Controller
             $req->school[1], $req->course[1], $req->fromDate[1], $req->toDate[1], $req->units[1], $req->yearGrad[1], $req->honors[1],
             $userId[0]->ID]);
             return "<script>window.location.href='/education'</script>";
+        }else if(Session::get("admin")){
+            $userId = $req->ID;
+        DB::update("
+            update EDUCATIONALBACKGROUND
+            set
+            ElemSchool=?, ElemCourse=?, ElemFrom=?, ElemTo=?, ElemUnits=?, ElemYearGrad=?, ElemHonors =?,
+            SecondSchool=?, SecondCourse=?, SecondFrom=?, SecondTo=?, SecondUnits=?, SecondYearGrad=?, SecondHonors =?
+
+            WHERE ID=?
+            ",
+            [$req->school[0], $req->course[0], $req->fromDate[0], $req->toDate[0], $req->units[0], $req->yearGrad[0], $req->honors[0],
+            $req->school[1], $req->course[1], $req->fromDate[1], $req->toDate[1], $req->units[1], $req->yearGrad[1], $req->honors[1],
+            $userId]);
+            return "<script>window.location.href='/admin/info/update'</script>";
         }else{
             return "<script>window.location.href='/logout'</script>";
         }
@@ -125,33 +139,61 @@ class SessionHandler extends Controller
     }
     public function updatePersonalInfo(Request $req){
         if(Session::get("user")){
-        $userId = DB::select("select * from faculty WHERE ACTIVESESSION=?",[Session::get("user")]);
-        //Get the profile pic first
-        if(strlen($_FILES["profile"]['name'])>0){
-            $f = $_FILES["profile"];
-            $name = $f["name"];
-            $tempname = $f["tmp_name"];
-            $newName= time().".".pathinfo($name, PATHINFO_EXTENSION);
-            $name=$newName;
-            move_uploaded_file($tempname, "profilepictures/$newName");
+            $userId = DB::select("select * from faculty WHERE ACTIVESESSION=?",[Session::get("user")]);
+            //Get the profile pic first
+            if(strlen($_FILES["profile"]['name'])>0){
+                $f = $_FILES["profile"];
+                $name = $f["name"];
+                $tempname = $f["tmp_name"];
+                $newName= time().".".pathinfo($name, PATHINFO_EXTENSION);
+                $name=$newName;
+                move_uploaded_file($tempname, "profilepictures/$newName");
 
-            //Send to Database
-            DB::update("update PROFILEPICTURES set DIRECTORY=? where ID=?",[$newName, $userId[0]->ID]);
-        }
-        DB::update("
-            update PERSONALINFO
-            set
-            FName=?, LName=?, MName=?, Extension=?, Birthdate=?, BirthPlace=?, Sex=?, Civil=?, Height=?, Weight=?, BloodType=?,
-            GSIS=?, PAGIBIG=?, PHILHEALTH=?, SSS=?, TIN=?, Citizen=?, House=?, Street=?, Subd=?, Barangay=?, City=?, Province=?, Zip=?, 
-            PermaHouse=?, PermaStreet=?,PermaSubd=?, PermaBarangay=?, PermaCity=?, PermaProvince=?, PermaZip=?, Tel=?, Phone=?, AltEmail=?
+                //Send to Database
+                DB::update("update PROFILEPICTURES set DIRECTORY=? where ID=?",[$newName, $userId[0]->ID]);
+            }
+            DB::update("
+                update PERSONALINFO
+                set
+                FName=?, LName=?, MName=?, Extension=?, Birthdate=?, BirthPlace=?, Sex=?, Civil=?, Height=?, Weight=?, BloodType=?,
+                GSIS=?, PAGIBIG=?, PHILHEALTH=?, SSS=?, TIN=?, Citizen=?, House=?, Street=?, Subd=?, Barangay=?, City=?, Province=?, Zip=?, 
+                PermaHouse=?, PermaStreet=?,PermaSubd=?, PermaBarangay=?, PermaCity=?, PermaProvince=?, PermaZip=?, Tel=?, Phone=?, AltEmail=?
 
-            WHERE ID=?
-            ",
-            [$req->FName, $req->LName, $req->MName,$req->Extension, $req->Birthday,$req->BirthPlace, $req->Sex, $req->CivilStatus, $req->Height, $req->Weight, $req->BloodType,
-            $req->GSIS, $req->PAGIBIG, $req->PHILHEALTH, $req->SSS, $req->TIN, $req->Citizenship, $req->House,$req->Street, $req->Subdivision,$req->Barangay, $req->City, $req->Province, $req->Zip,
-            $req->PermHouse, $req->PermStreet, $req->PermSubdivision,$req->PermBarangay, $req->PermCity, $req->PermProvince, $req->PermZip, $req->Telephone, $req->Phone, $req->altEmail,
-            $userId[0]->ID]);
-            return "<script>window.location.href='/home'</script>";
+                WHERE ID=?
+                ",
+                [$req->FName, $req->LName, $req->MName,$req->Extension, $req->Birthday,$req->BirthPlace, $req->Sex, $req->CivilStatus, $req->Height, $req->Weight, $req->BloodType,
+                $req->GSIS, $req->PAGIBIG, $req->PHILHEALTH, $req->SSS, $req->TIN, $req->Citizenship, $req->House,$req->Street, $req->Subdivision,$req->Barangay, $req->City, $req->Province, $req->Zip,
+                $req->PermHouse, $req->PermStreet, $req->PermSubdivision,$req->PermBarangay, $req->PermCity, $req->PermProvince, $req->PermZip, $req->Telephone, $req->Phone, $req->altEmail,
+                $userId[0]->ID]);
+                return "<script>window.location.href='/home'</script>";
+        }else if(Session::get("admin")){
+            $userId=$req->UserID;
+            //Get the profile pic first
+            if(strlen($_FILES["profile"]['name'])>0){
+                $f = $_FILES["profile"];
+                $name = $f["name"];
+                $tempname = $f["tmp_name"];
+                $newName= time().".".pathinfo($name, PATHINFO_EXTENSION);
+                $name=$newName;
+                move_uploaded_file($tempname, "profilepictures/$newName");
+
+                //Send to Database
+                DB::update("update PROFILEPICTURES set DIRECTORY=? where ID=?",[$newName, $userId]);
+            }
+            DB::update("
+                update PERSONALINFO
+                set
+                FName=?, LName=?, MName=?, Extension=?, Birthdate=?, BirthPlace=?, Sex=?, Civil=?, Height=?, Weight=?, BloodType=?,
+                GSIS=?, PAGIBIG=?, PHILHEALTH=?, SSS=?, TIN=?, Citizen=?, House=?, Street=?, Subd=?, Barangay=?, City=?, Province=?, Zip=?, 
+                PermaHouse=?, PermaStreet=?,PermaSubd=?, PermaBarangay=?, PermaCity=?, PermaProvince=?, PermaZip=?, Tel=?, Phone=?, AltEmail=?
+
+                WHERE ID=?
+                ",
+                [$req->FName, $req->LName, $req->MName,$req->Extension, $req->Birthday,$req->BirthPlace, $req->Sex, $req->CivilStatus, $req->Height, $req->Weight, $req->BloodType,
+                $req->GSIS, $req->PAGIBIG, $req->PHILHEALTH, $req->SSS, $req->TIN, $req->Citizenship, $req->House,$req->Street, $req->Subdivision,$req->Barangay, $req->City, $req->Province, $req->Zip,
+                $req->PermHouse, $req->PermStreet, $req->PermSubdivision,$req->PermBarangay, $req->PermCity, $req->PermProvince, $req->PermZip, $req->Telephone, $req->Phone, $req->altEmail,
+                $userId]);
+                return "<script>window.location.href='/admin/info/update'</script>";
         }else{
             return "<script>window.location.href='/logout'</script>";
         }
@@ -179,6 +221,26 @@ class SessionHandler extends Controller
             [$req->title, $req->type,$req->fromDate,$req->toDate,$req->hours,$req->ldtype,$req->conducted,
             $id]);
             return "<script>window.location.href='/cert'</script>";
+        }else if(Session::has("admin")){
+            if(strlen($_FILES["upload"]['name'])>0){
+                $f = $_FILES["upload"];
+                $name = $f["name"];
+                $tempname = $f["tmp_name"];
+                $newName= time().".".pathinfo($name, PATHINFO_EXTENSION);
+                $name=$newName;
+                move_uploaded_file($tempname, "certificates/$newName");
+                //Send to Database
+                DB::update("update CERTIFICATIONS set Certificate=? where ID=?",[$newName, $id]);
+            }
+            DB::update("
+                update CERTIFICATIONS
+                set
+                Title=?, Type=?, FromDate=?, ToDate=?, Hours=?, LDType=?, Conducted=?
+                WHERE ID=?
+                ",
+                [$req->title, $req->type,$req->fromDate,$req->toDate,$req->hours,$req->ldtype,$req->conducted,
+                $id]);
+                return "<script>window.location.href='/admin/info/update'</script>";
         }else{
             return "<script>window.location.href='/logout'</script>";
         }
@@ -376,6 +438,19 @@ class SessionHandler extends Controller
                             WHERE ID=? and FacultyID=?", [$id, $userId[0]->ID]);
             }
             return "<script>window.location.href='/work'</script>";
+        }else if(Session::has("admin")){
+            $gov=0;
+            if($r->input("government")=="yes")
+                $gov=1;
+            if($r->input("action")=="Save Changes"){
+                DB::update(
+                    "update WORKEXPERIENCE
+                    set FromDate=? , ToDate=? , Position=? , Department=? , Salary=? , SalaryGrade=? ,Status=? ,Government=?
+                    WHERE ID=?",[$r->input("fromDate"), $r->input("toDate"), $r->input("position"), $r->input("department"), $r->input("salary"), $r->input("salarygrade"), $r->input("status"), $gov,
+                    $id]
+                );
+            }
+            return "<script>window.location.href='/admin/info/update'</script>";
         }else{
             return "<script>window.location.href='/logout'</script>";
         }
@@ -424,11 +499,18 @@ class SessionHandler extends Controller
                     WHERE ID=? and FacultyID=?",[$r->input("civil"), $r->input("rating"), $r->input("date"), $r->input("place"), $r->input("num"), $r->input("valid"),
                     $id, $userId[0]->ID]
                 );
-            }else if($r->input("action")=="Delete"){
-                DB::delete("delete from CIVILSERVICE
-                            WHERE ID=? and FacultyID=?", [$id, $userId[0]->ID]);
             }
             return "<script>window.location.href='/civil'</script>";
+        }else if(Session::has("admin")){
+            if($r->input("action")=="Save Changes"){
+                DB::update(
+                    "update CIVILSERVICE
+                    set Service=?, Rating=?, ExamDate=?, ExamPlace=?, LicenseNo=?, Validity=?
+                    WHERE ID=?",[$r->input("civil"), $r->input("rating"), $r->input("date"), $r->input("place"), $r->input("num"), $r->input("valid"),
+                    $id]
+                );
+            }
+            return "<script>window.location.href='/admin/info/update'</script>";
         }else{
             return "<script>window.location.href='/logout'</script>";
         }
@@ -479,11 +561,18 @@ class SessionHandler extends Controller
                     WHERE ID=? and FacultyID=?",[$r->input("school"), $r->input("course"), $r->input("fromDate"), $r->input("toDate"), $r->input("units"), $r->input("yearGrad"), $r->input("honors"),
                     $id, $userId[0]->ID]
                 );
-            }else if($r->input("action")=="Delete"){
-                DB::delete("delete from GRADUATESTUDIES
-                            WHERE ID=? and FacultyID=?", [$id, $userId[0]->ID]);
             }
             return "<script>window.location.href='/graduate'</script>";
+        }else if(Session::has("admin")){
+            if($r->input("action")=="Save Changes"){
+                DB::update(
+                    "update GRADUATESTUDIES
+                    set Name=?,Course=?, FromDate=?, ToDate=?, Units=?, Year=?, Honors=?  
+                    WHERE ID=?",[$r->input("school"), $r->input("course"), $r->input("fromDate"), $r->input("toDate"), $r->input("units"), $r->input("yearGrad"), $r->input("honors"),
+                    $id]
+                );
+            }
+            return "<script>window.location.href='/admin/info/update'</script>";
         }else{
             return "<script>window.location.href='/logout'</script>";
         }
@@ -499,11 +588,18 @@ class SessionHandler extends Controller
                     WHERE ID=? and FacultyID=?",[$r->input("school"), $r->input("course"), $r->input("fromDate"), $r->input("toDate"), $r->input("units"), $r->input("yearGrad"), $r->input("honors"),
                     $id, $userId[0]->ID]
                 );
-            }else if($r->input("action")=="Delete"){
-                DB::delete("delete from COLLEGES
-                            WHERE ID=? and FacultyID=?", [$id, $userId[0]->ID]);
             }
             return "<script>window.location.href='/college'</script>";
+        }else if(Session::has("admin")){
+            if($r->input("action")=="Save Changes"){
+                DB::update(
+                    "update COLLEGES
+                    set Name=?,Course=?, FromDate=?, ToDate=?, Units=?, Year=?, Honors=?  
+                    WHERE ID=?",[$r->input("school"), $r->input("course"), $r->input("fromDate"), $r->input("toDate"), $r->input("units"), $r->input("yearGrad"), $r->input("honors"),
+                    $id]
+                );
+                return "<script>window.location.href='/admin/info/update'</script>";
+            }
         }else{
             return "<script>window.location.href='/logout'</script>";
         }
@@ -537,6 +633,16 @@ class SessionHandler extends Controller
                             WHERE ID=? and FacultyID=?", [$id, $userId[0]->ID]);
             }
             return "<script>window.location.href='/vocational'</script>";
+        }else if(Session::has("admin")){
+            if($r->input("action")=="Save Changes"){
+                DB::update(
+                    "update VOCATIONALCOURSES
+                    set Name=?,Course=?, FromDate=?, ToDate=?, Units=?, Year=?, Honors=?  
+                    WHERE ID=?",[$r->input("school"), $r->input("course"), $r->input("fromDate"), $r->input("toDate"), $r->input("units"), $r->input("yearGrad"), $r->input("honors"),
+                    $id]
+                );
+            }
+            return "<script>window.location.href='/admin/info/update'</script>";
         }else{
             return "<script>window.location.href='/logout'</script>";
         }

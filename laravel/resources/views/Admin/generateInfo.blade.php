@@ -10,18 +10,19 @@
     @if($action=="View")
     <div class="topbar">
         <ul>
-            <li><a href='/admin'>Accept Faculties</a></li>
+        <li><a href='/admin'>Accept Faculties</a></li>
             <li><a href='/admin/info'>View/Download Information</a></li>
+            <li><a href='/admin/info/update'>Update Faculty Information</a></li>
             <li><a href='/admin/logout'>Log out</a></li>
         </ul>
     </div>
     @endif
         @foreach($fac as $user)
-        <hr />
+        <div class="report">
         <center><h3>Showing Information for: {{  DB::select('select * from faculty where ID=?',[$user])[0]->USERNAME   }}</h3></center>
             @foreach($perso as $record)
                 @if($user==$record->ID)
-    <div class="report">
+                
                     <table class="infoTable">
                     <caption><b> PERSONAL INFORMATION </b></caption>
                     <tr>

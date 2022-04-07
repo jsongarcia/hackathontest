@@ -16,25 +16,41 @@
         </ul>
     </div>
     @if(count($faculty)>0)
+    <form action="/admin/info/update/get" method="get">
     <table class="collapseTable">
-        <caption><b>Unactivated Faculty Accounts<b></caption>
+        <caption><b>Faculty Accounts<b></caption>
         <tr>
             <th class="collapseTd"> Employee Number</th>
             <th class="collapseTd">Faculty User Name</th>
-            <th class="collapseTd">Action</th>
+            <th class="collapseTd">Select</th>
         </tr>
         @foreach($faculty as $record)
         <tr>
             <td class="collapseTd">{{$record->ID}}</td>
             <td class="collapseTd">{{$record->USERNAME}}</td>
-            <td class="collapseTd"><form action="/admin/activate/{{$record->ID}}" method="GET"> @csrf <input type="submit" value="ACTIVATE"></form></td>
+            <td class="collapseTd"><input type="radio" name="target" value="{{$record->ID}}"></td>
         </tr>
         @endforeach
     </table>
+    
     @else
         <table>
-            <caption>No unactivated faculty accounts found</caption>
+            <caption>No faculty accounts found</caption>
         </table>
     @endif
+
+    <div class="infoSelection">
+        <h3>Select which information to update</h3>
+        <input type="submit" name="action" value="Personal Information">
+        <input type="submit" name="action" value="Education">
+        <input type="submit" name="action" value="Vocational/Trade Course">
+        <input type="submit" name="action" value="College"><br /><br />
+        <input type="submit" name="action" value="Graduate Studies">
+        <input type="submit" name="action" value="Civil Service">
+        <input type="submit" name="action" value="Work Experience">
+        <input type="submit" name="action" value="Certifications">
+        </ul>
+    </div>
+    </form>
 </body>
 </html>

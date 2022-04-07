@@ -84,11 +84,19 @@ iframe{
 .report{
     border-color: black;
     border-style: solid;
-    width: 90%;
+    width: 80%;
     margin: auto;
     margin-top: 6%;
 }
-
+.infoSelection{
+    border: 1px solid black;
+    border-radius:20px;
+    width:80%;
+    padding:30px;
+    margin: auto;
+    margin-top:20px;
+    text-align: center;
+}
 .form1 ul{
     list-style-type: none;
 }
