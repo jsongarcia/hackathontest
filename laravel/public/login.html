@@ -1,4 +1,3 @@
-
 <html>
     <head>
         <title>Login Page</title>
@@ -7,18 +6,8 @@
     <body>
         <div class = "login">
             <h1 class="title">Login Page</h1>
-            @if(Session::has("user"))
-            <script> window.location.href="/home" </script>
-             @endif
-            @if(isset($error))
-                <p class="msg msg-error">{{$error}}</p>
-            @endif
-            @if(isset($notice))
-            <p class="msg msg-notice">{{$notice}}</p>
-        @endif
-            <form action="/" method="POST">
-            @csrf
-            <input type = "email" name="email" placeholder="Email" required><br>
+                                                <form action="/" method="POST">
+            <input type="hidden" name="_token" value="AQNLFb0E37tSoKh5ung0vwV7Rq47qpzX0pxVFqJ9">            <input type = "email" name="email" placeholder="Email" required><br>
             <input type = "password" name="password" placeholder="Password" required><br>
             <input type="submit" value="Login" />
             </form>
@@ -27,3 +16,4 @@
         
     </body>
 </html>
+
