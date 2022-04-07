@@ -62,7 +62,7 @@
                     </tr>
                     <tr>
                         <td>Weight: </td>
-                        <td>{{$record->Weight}}"</td>
+                        <td>{{$record->Weight}}</td>
                     </tr>
                     <tr>
                         <td>Blood Type: </td>
