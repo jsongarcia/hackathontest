@@ -3,7 +3,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=1, initial-scale=1.0">
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="/css/main.css">
     <title>Document</title>
 </head>
 <body>
@@ -32,42 +32,42 @@
             </tr>
             <tr>
                 <td>From: </td>
-                <td><input type="date" name="fromDate" value="{{$record->FromDate}}"></td>
+                <td><input type="date" name="fromDate" value="{{$record->FromDate}}" required></td>
             </tr>
             <tr>
                 <td>To: </td>
-                <td><input type="date" name="toDate" value="{{$record->ToDate}}"></td>
+                <td><input type="date" name="toDate" value="{{$record->ToDate}}" required></td>
             </tr>
             <tr>
-                <td>Position/Title: </td>
-                <td><input type="text" name="position" value="{{$record->Position}}"></td>
+                <td>Position/Title (Write in full/Don't abbreviate): </td>
+                <td><input type="text" name="position" value="{{$record->Position}}" required></td>
             </tr>
             <tr>
-                <td>Department/Agency/Office/Company: </td>
-                <td><input type="text" name="department" value="{{$record->Department}}"></td>
+                <td>Department/Agency/Office/Company (Write in full/Don't abbreviate): </td>
+                <td><input type="text" name="department" value="{{$record->Department}}" required></td>
             </tr>
             <tr>
                 <td>Monthly Salary: </td>
-                <td><input type="text" name="salary" value="{{$record->Salary}}"></td>
+                <td><input type="text" name="salary" value="{{$record->Salary}}" required></td>
             </tr>
             <tr>
-                <td>Salary/Job/Pay Grade: </td>
+                <td>Salary/Job/Pay Grade (if applicable): </td>
                 <td><input type="text" name="salarygrade" value="{{$record->SalaryGrade}}"></td>
             </tr>
             <tr>
                 <td>Status of Appointment: </td>
-                <td><input type="text" name="status" value="{{$record->Status}}"></td>
+                <td><input type="text" name="status" value="{{$record->Status}}" required></td>
             </tr>
             <tr>
                 <td>Government Service: </td>
                 <td>
                 @if($record->Government)
-                <select name="government">
+                <select name="government" required>
                     <option value="yes" selected="selected">Yes</option>
                     <option value="no">No</option>
                 </select>
                 @else
-                <select name="government">
+                <select name="government" required>
                     <option value="yes">Yes</option>
                     <option value="no" selected="selected">No</option>
                 </select>
@@ -79,7 +79,6 @@
         </form>
         @endforeach
         <br /><br />
-        <button><a href="/work/addEntry">Add Work Experience</a></button>
 </div>
 </body>
 </html>

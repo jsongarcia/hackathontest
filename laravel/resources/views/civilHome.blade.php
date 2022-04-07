@@ -24,7 +24,7 @@
 <div class = "form">
 <p><b>CIVIL SERVICE</b></p>
         @foreach($data ?? [] as $record)
-        <table>
+        <table class="infoTable">
         <form action="/editCivil/{{$record->ID}}" method="GET">
             @csrf
             <tr>

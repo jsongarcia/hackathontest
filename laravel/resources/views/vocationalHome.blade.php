@@ -24,7 +24,7 @@
 <div class="form">
 <p><b>VOCATIONAL COURSES</b></p>
         @foreach($data ?? [] as $record)
-        <table>
+        <table class="infoTable">
         <form action="/editVocational/{{$record->ID}}" method="GET">
             @csrf
             <tr>

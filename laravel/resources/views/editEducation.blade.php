@@ -35,15 +35,15 @@
                 @if(isset($data))
                     value="{{$data[0]->ElemSchool}}"
                 @endif
-                ></td>
+                required></td>
             </tr>
             <tr>
-                <td>Basic Education/Degree/Course: </td>
+                <td>Basic Education/Degree/Course(Write in full): </td>
                 <td><input type="text" name="course[]"
                 @if(isset($data))
                     value="{{$data[0]->ElemCourse}}"
                 @endif
-                ></td>
+                required></td>
             </tr>
             <tr>
                 <td colspan="2">Period of attendance  : </td>
@@ -55,7 +55,7 @@
                 @if(isset($data))
                     value="{{$data[0]->ElemFrom}}"
                 @endif
-                ></td>
+                required></td>
             </tr>
             <tr>
                 <td>To: </td>
@@ -63,7 +63,7 @@
                 @if(isset($data))
                     value="{{$data[0]->ElemTo}}"
                 @endif
-                ></td>
+                required></td>
             </tr>
             <tr>
                 <td>Highest Level/Units Earned (if not graduated):  </td>
@@ -79,7 +79,7 @@
                 @if(isset($data))
                     value="{{$data[0]->ElemYearGrad}}"
                 @endif
-                ></td>
+                required></td>
             </tr>
             <tr>
                 <td>Scholarship/Academic Honors Received: </td>

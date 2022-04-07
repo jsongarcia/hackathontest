@@ -3,7 +3,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=1, initial-scale=1.0">
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="/css/main.css">
     <title>Document</title>
 </head>
 <body>
@@ -29,11 +29,11 @@
             @csrf
             <tr>
                 <td>Name of School: </td>
-                <td><input type="text" name="school" value="{{$record->Name}}"></td>
+                <td><input type="text" name="school" value="{{$record->Name}}" required></td>
             </tr>
             <tr>
-                <td>Basic Education/Degree/Course: </td>
-                <td><input type="text" name="course" value="{{$record->Course}}"></td>
+                <td>Basic Education/Degree/Course (Write in full): </td>
+                <td><input type="text" name="course" value="{{$record->Course}}" required></td>
             </tr>
             <tr>
                 <td colspan="2">Period of attendance  : </td>
@@ -41,11 +41,11 @@
             </tr>
             <tr>
                 <td>From: </td>
-                <td><input type="date" name="fromDate" value="{{$record->FromDate}}"></td>
+                <td><input type="date" name="fromDate" value="{{$record->FromDate}}" required></td>
             </tr>
             <tr>
                 <td>To: </td>
-                <td><input type="date" name="toDate" value="{{$record->ToDate}}"></td>
+                <td><input type="date" name="toDate" value="{{$record->ToDate}}" required></td>
             </tr>
             <tr>
                 <td>Highest Level/Units Earned (if not graduated):  </td>
@@ -53,7 +53,7 @@
             </tr>
             <tr>
                 <td>Year Graduated: </td>
-                <td><input type="date" name="yearGrad" value="{{$record->Year}}"></td>
+                <td><input type="date" name="yearGrad" value="{{$record->Year}}" required></td>
             </tr>
             <tr>
                 <td>Scholarship/Academic Honors Received: </td>
@@ -64,7 +64,6 @@
         </form>
         @endforeach
         <br /><br />
-        <button><a href="/graduate/addEntry">Add Graduate Study</a></button>
 </div>
     </body>
 </html>

@@ -3,7 +3,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=1, initial-scale=1.0">
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="/css/main.css">
     <title>Document</title>
 </head>
 <body>
@@ -31,36 +31,36 @@
             </tr>
             <tr>
                 <td>From: </td>
-                <td><input type="date" name="fromDate"></td>
+                <td><input type="date" name="fromDate" required></td>
             </tr>
             <tr>
                 <td>To: </td>
-                <td><input type="date" name="toDate"></td>
+                <td><input type="date" name="toDate" required></td>
             </tr>
             <tr>
-                <td>Position/Title: </td>
-                <td><input type="text" name="position"></td>
+                <td>Position/Title (Write in full/Don't abbreviate): </td>
+                <td><input type="text" name="position" required></td>
             </tr>
             <tr>
-                <td>Department/Agency/Office/Company: </td>
-                <td><input type="text" name="department"></td>
+                <td>Department/Agency/Office/Company (Write in full/Don't abbreviate): </td>
+                <td><input type="text" name="department" required></td>
             </tr>
             <tr>
                 <td>Monthly Salary: </td>
-                <td><input type="text" name="salary"></td>
+                <td><input type="text" name="salary" required></td>
             </tr>
             <tr>
-                <td>Salary/Job/Pay Grade: </td>
+                <td>Salary/Job/Pay Grade (if applicable): </td>
                 <td><input type="text" name="salarygrade"></td>
             </tr>
             <tr>
                 <td>Status of Appointment: </td>
-                <td><input type="text" name="status"></td>
+                <td><input type="text" name="status" required></td>
             </tr>
             <tr>
                 <td>Government Service: </td>
                 <td>
-                <select name="government">
+                <select name="government" required>
                     <option selected="selected" disabled></option>
                     <option value="yes">Yes</option>
                     <option value="no">No</option>

@@ -3,7 +3,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=1, initial-scale=1.0">
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="/css/main.css">
     <title>Document</title>
 </head>
 <body>
@@ -28,11 +28,11 @@
             @csrf
             <tr>
                 <td>Name of School: </td>
-                <td><input type="text" name="school"></td>
+                <td><input type="text" name="school" required></td>
             </tr>
             <tr>
-                <td>Basic Education/Degree/Course: </td>
-                <td><input type="text" name="course"></td>
+                <td>Basic Education/Degree/Course (Write in full): </td>
+                <td><input type="text" name="course" required></td>
             </tr>
             <tr>
                 <td colspan="2">Period of attendance  : </td>
@@ -40,11 +40,11 @@
             </tr>
             <tr>
                 <td>From: </td>
-                <td><input type="date" name="fromDate"></td>
+                <td><input type="date" name="fromDate" required></td>
             </tr>
             <tr>
                 <td>To: </td>
-                <td><input type="date" name="toDate"></td>
+                <td><input type="date" name="toDate" required></td>
             </tr>
             <tr>
                 <td>Highest Level/Units Earned (if not graduated):  </td>
@@ -52,7 +52,7 @@
             </tr>
             <tr>
                 <td>Year Graduated: </td>
-                <td><input type="date" name="yearGrad"></td>
+                <td><input type="date" name="yearGrad" required></td>
             </tr>
             <tr>
                 <td>Scholarship/Academic Honors Received: </td>

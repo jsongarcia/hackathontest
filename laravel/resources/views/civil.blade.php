@@ -28,19 +28,19 @@
             @csrf
             <tr>
                 <td>Civil Service Type: </td>
-                <td><input type="text" name="civil"></td>
+                <td><input type="text" name="civil" required></td>
             </tr>
             <tr>
                 <td>Rating: </td>
-                <td><input type="text" name="rating"></td>
+                <td><input type="text" name="rating" required></td>
             </tr>
             <tr>
                 <td>Date of Examination/Conferment: </td>
-                <td><input type="date" name="date"></td>
+                <td><input type="date" name="date" required></td>
             </tr>
             <tr>
                 <td>Place of Examination/Confement: </td>
-                <td><input type="text" name="place"></td>
+                <td><input type="text" name="place" required></td>
             </tr>
             <tr>
                 <td>License (if applicable):  </td>

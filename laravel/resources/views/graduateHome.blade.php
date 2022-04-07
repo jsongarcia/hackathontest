@@ -24,7 +24,7 @@
 <div class="form">
 <p><b>GRADUATE STUDIES</b></p>
         @foreach($data ?? [] as $record)
-        <table>
+        <table class="infoTable">
         <form action="/editGraduate/{{$record->ID}}" method="GET">
             @csrf
             <tr>

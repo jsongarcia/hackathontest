@@ -3,7 +3,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=1, initial-scale=1.0">
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="/css/main.css">
     <title>Document</title>
 </head>
 <body>
@@ -17,11 +17,11 @@
     
         @foreach($fac as $user)
         <hr />
-        <label>Showing Information for: {{  DB::select('select * from faculty where ID=?',[$user])[0]->USERNAME   }}</label>
+        <center><h3>Showing Information for: {{  DB::select('select * from faculty where ID=?',[$user])[0]->USERNAME   }}</h3></center>
             @foreach($perso as $record)
                 @if($user==$record->ID)
     <div class="report">
-                    <table>
+                    <table class="infoTable">
                     <caption><b> PERSONAL INFORMATION </b></caption>
                     <tr>
                         <td>Email Address:</td>
@@ -168,10 +168,10 @@
                 </table>
                 @endif
             @endforeach
-
+            <hr />
             @foreach($educ as $record)
                 @if($user==$record->ID)
-                <table>
+                <table class="infoTable">
                     <caption><b>EDUCATIONAL BACKGROUND</b></caption>
                         <tr>
                             <td colspan="2">Elementary</td>
@@ -236,11 +236,12 @@
                 @if($user==$record->FacultyID)
                 @if($vocEcho)
                     {{$vocEcho=false}}
-                    <table>
+                    <hr />
+                    <table class="infoTable">
                         <caption><b>VOCATIONAL COURSE</b></caption>
                     </table>
                 @endif
-                <table>
+                <table class="infoTable">
                     <tr>
                         <td>Name of School: </td>
                         <td>{{$record->Name}}</td>
@@ -275,11 +276,12 @@
             @if($user==$record->FacultyID)
             @if($collEcho)
                     {{$collEcho=false}}
-                    <table>
+                    <hr />
+                    <table class="infoTable">
                         <caption><b>COLLEGE COURSE</b></caption>
                     </table>
             @endif
-            <table>
+            <table class="infoTable">
                 <tr>
                     <td>Name of School: </td>
                     <td>{{$record->Name}}</td>
@@ -313,11 +315,12 @@
             @if($user==$record->FacultyID)
             @if($gradEcho)
                     {{$gradEcho=false}}
-                    <table>
+                    <hr />
+                    <table class="infoTable">
                         <caption><b>GRADUATE STUDY</b></caption>
                     </table>
             @endif
-            <table>
+            <table class="infoTable">
             
                 <tr>
                     <td>Name of School: </td>
@@ -352,11 +355,12 @@
             @if($user==$record->FacultyID)
             @if($civilEcho)
                     {{$civilEcho=false}}
-                    <table>
+                    <hr />
+                    <table class="infoTable">
                         <caption><b>CIVIL SERVICE</b></caption>
                     </table>
             @endif
-            <table>
+            <table class="infoTable">
                 <tr>
                     <td>Civil Service Type: </td>
                     <td>{{$record->Service}}</td>
@@ -390,11 +394,12 @@
             @if($user==$record->FacultyID)
             @if($workEcho)
                     {{$workEcho=false}}
-                    <table>
+                    <hr />
+                    <table class="infoTable">
                         <caption><b>WORK EXPERIENCE</b></caption>
                     </table>
             @endif
-            <table>
+            <table class="infoTable">
                 <tr>
                     <td>Inclusive Dates: </td>
                     <td>{{date_create($record->FromDate)->format('m/d/Y')}} - {{date_create($record->ToDate)->format('m/d/Y')}}</td>
@@ -440,11 +445,12 @@
             @if($user==$record->FacultyID)
             @if($certEcho)
                     {{$certEcho=false}}
-                    <table>
+                    <hr />
+                    <table class="infoTable">
                         <caption><b>CERTIFICATES</b></caption>
                     </table>
             @endif
-            <table>
+            <table class="infoTable">
                 <tr>
                     <td>Title: </td>
                     <td>{{$record->Title}}</td>
@@ -470,11 +476,12 @@
                     <td>{{$record->LDType}}</td>
                 </tr>
                 <tr>
-                    <td colspan='2'><iframe src="/certificates/{{$record->Certificate}}"></iframe></td>
+                    <td colspan='2'><center><iframe src="/certificates/{{$record->Certificate}}"></center></iframe></td>
                 </tr>
             </table><br />
             @endif
             @endforeach
+</div>
             @endforeach
 </div>
 </body>

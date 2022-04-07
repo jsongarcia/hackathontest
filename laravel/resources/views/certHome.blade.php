@@ -3,7 +3,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=1, initial-scale=1.0">
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="/css/main.css">
     <title>Document</title>
 </head>
 <body>
@@ -24,7 +24,7 @@
 <div class="form">
 <p><b>CERTIFICATES</b></p>
         @foreach($data ?? [] as $record)
-        <table>
+        <table class="infoTable">
         <form action="/editCert/{{$record->ID}}" method="GET">
             @csrf
             <tr>

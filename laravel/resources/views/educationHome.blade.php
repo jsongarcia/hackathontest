@@ -24,11 +24,11 @@
         </div>
 <div class="form">
 <h3>EDUCATIONAL BACKGROUND: </h3>
-        <table>
+        <table class="infoTable">
         <form action="/editEducation" method="GET">
             @csrf
             <tr>
-                <td colspan="2"><b>Elementary</b></td>
+                <td colspan="2"><center>Elementary</center></td>
             </tr>
             <tr>
                 <td>Name of School: </td>
@@ -55,7 +55,7 @@
                 <td>{{$data[0]->ElemHonors}}</td>
             </tr>
             <tr>
-                <td colspan="2"><b>Secondary</b></td>
+                <td colspan="2"><br /><center>Secondary</center></td>
             </tr>
             <tr>
                 <td>Name of School: </td>

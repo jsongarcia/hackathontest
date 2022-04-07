@@ -28,39 +28,39 @@
         <form action="/publishCert" method="POST" enctype="multipart/form-data">
             @csrf
             <tr>
-                <td>Title: </td>
-                <td><input type="text" name="title"></td>
+                <td>Title of L&D/Training Programs (Write in full): </td>
+                <td><input type="text" name="title" required></td>
             </tr>
             <tr>
                 <td>Type: </td>
-                <td><input type="text" name="type"></td>
+                <td><input type="text" name="type" required></td>
             </tr>
             <tr>
                 <td>Date of Attendance: </td>
             </tr>
             <tr>
                 <td>From</td>
-                <td><input type="date" name="fromDate" format="MM DD YYYY"></td>
+                <td><input type="date" name="fromDate" required></td>
             </tr>
             <tr>
                 <td>To</td>
-                <td><input type="date" name="toDate"></td>
+                <td><input type="date" name="toDate" required></td>
             </tr>
             <tr>
                 <td>Number of Hours: </td>
-                <td><input type="text" name="hours"></td>
+                <td><input type="text" name="hours" required></td>
             </tr>
             <tr>
                 <td>Conducted/Sponsored By: </td>
-                <td><input type="text" name="conducted"></td>
+                <td><input type="text" name="conducted" required></td>
             </tr>
             <tr>
-                <td>Type of LD: </td>
-                <td><input type="text" name="ldtype"></td>
+                <td>Type of L&D (Managerial, Supervisory, etc.): </td>
+                <td><input type="text" name="ldtype" required></td>
             </tr>
             <tr>
                 <td>Certificate(IMG/PDF): </td>
-                <td><input type="file" name="upload" accept="image/*, application/pdf"></td>
+                <td><input type="file" name="upload" accept="image/*, application/pdf" required></td>
             </tr>
         </table><br />
         <input type="submit" value="Add Entry">

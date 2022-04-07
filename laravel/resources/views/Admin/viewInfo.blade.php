@@ -3,7 +3,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=1, initial-scale=1.0">
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="/css/main.css">
     <title>Document</title>
 </head>
 <body>
@@ -17,8 +17,8 @@
     <div class="faculty">
     <form action="/admin/info/generate" method="GET">
     <div class="info">
-    <input type="submit" value="View Information">
     <ul>
+        <li><h4><center>Filter Information</center></h4></li>
         <li><input type="checkbox" onclick="tickAll(this)">All Information</li>
         <ul>
             <li><input type="checkbox" name="personal">Personal Information</li>
@@ -32,20 +32,25 @@
         </ul>
     </ul>
 </div>
-    <table>
+    <div class="info">
+    <table class="collapseTable">
+        <caption><h4>Select Faculty</h4></caption>
         <tr>
-            <td><input type="checkbox" onclick="tickFaculty(this)"></td>
-            <td>Employee ID</td>
-            <td>Employee Username</td>
+            <td class="collapseTd"><input type="checkbox" onclick="tickFaculty(this)"></td>
+            <td class="collapseTd">Employee ID</td>
+            <td class="collapseTd">Employee Username</td>
         </tr>
 
         @foreach($faculty as $record)
         <tr>
-            <td><input type="checkbox" name="faculty[]" value="{{$record->ID}}"></td>
-            <td>{{$record->ID}}</td>
-            <td>{{$record->USERNAME}}</td>
+            <td class="collapseTd"><input type="checkbox" name="faculty[]" value="{{$record->ID}}"></td>
+            <td class="collapseTd">{{$record->ID}}</td>
+            <td class="collapseTd">{{$record->USERNAME}}</td>
         @endforeach
     </table>
+</div>
+
+    <center><input type="submit" value="View Information" style="margin-top:20px;"></center>
     </form>
 
     <script>

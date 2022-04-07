@@ -23,11 +23,32 @@ h3, p{
     margin: auto;
     margin-top: 6%;
 }
-
+iframe{
+    width:80%;
+    height:400px;
+}
 .login a{
     padding: 15px;
     color: rgba(116, 9, 9, 0.959);
     text-decoration: none;
+}
+.msg, .success{
+    color:white;
+    font-size: 1em;
+    padding:10px;
+    text-align:center;
+    border-radius:10px;
+    margin-left: 10px;
+    margin-right:10px;
+}
+.msg-error{
+    background-color: firebrick;
+}
+.msg-success{
+    background-color: green;
+}
+.msg-notice{
+    background-color: darkorange;
 }
 
 .login a:hover{
@@ -81,7 +102,18 @@ table, tr{
     margin: auto;
     margin-top: 6%;
 }
-
+.collapseTable{
+    width:80%;
+    text-align: center;
+}
+.collapseTable, .collapseTd{
+    border:1px solid black;
+    border-collapse:collapse;
+    padding:10px;
+}
+.infoTable{
+    width:90%;
+}
 .info{
     flex: 1;
     padding: 40px;
@@ -108,7 +140,7 @@ table, tr{
 }
 
 
-input[type=text], input[type=date], input[type=file], input[type=password], select{
+input[type=text], input[type=date], input[type=file], input[type=password],input[type=email], select{
     padding: 10px 40px;
     margin: 10px 5px;
     border-radius: 12px;

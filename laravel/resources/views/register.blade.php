@@ -6,14 +6,17 @@
     <body>
         <div class="login">
         <h1>Register Page</h1>
-        @if(isset($msg))
-            <p>{{$msg}}</p>
+        @if(isset($error))
+            <p class="msg msg-error">{{$error}}</p>
+        @endif
+        @if(isset($success))
+            <p class="msg msg-success">{{$success}}</p>
         @endif
         <form action="/addUser" method="POST">
         @csrf
-        <input type = "text" name="email" placeholder="Email"><br>
-        <input type = "password" name="pass1" placeholder="Password"><br>
-        <input type = "password" name="pass2" placeholder="Confirm Password"><br>
+        <input type = "email" name="email" placeholder="Email" required><br>
+        <input type = "password" name="pass1" placeholder="Password" required><br>
+        <input type = "password" name="pass2" placeholder="Confirm Password" required><br>
         <input type="submit" value="Register"><br>
         </form>
         <a href = "/">Have an account? <b>Login</b></a>

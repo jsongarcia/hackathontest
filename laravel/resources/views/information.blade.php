@@ -29,9 +29,9 @@
                 src="profilepictures/default-pic.png"
             @endif
             width=200px height=200px>
-        <table>
+        <table class="infoTable">
             <tr>
-                <td><b>Email Address: </b></td>
+                <td>Email Address:</td>
                 <td>{{DB::select('select * from faculty where ACTIVESESSION=?',[Session::get('user')])[0]->USERNAME}}</td>
             </tr>      
             <tr>
@@ -40,7 +40,7 @@
             </tr>
             <tr>
                 <td>Employee Name: </td>
-                <td>{{$info[0]->FName}} {{$info[0]->MName}}. {{$info[0]->LName}}</td>
+                <td>{{$info[0]->FName}} {{$info[0]->MName}} @if(($info[0]->MName)) . @endif {{$info[0]->LName}} {{$info[0]->Extension}}</td>
             </tr>
             <tr>
                 <td>Date of Birth: </td>
@@ -68,7 +68,7 @@
             </tr>
             <tr>
                 <td>Weight: </td>
-                <td>{{$info[0]->Weight}}"</td>
+                <td>{{$info[0]->Weight}}</td>
             </tr>
             <tr>
                 <td>Blood Type: </td>
@@ -115,7 +115,7 @@
             </tr>
             <tr>
                 <td>Barangay: </td>
-                <td>{{$info[0]->Barangay}}/td>
+                <td>{{$info[0]->Barangay}}</td>
             </tr>
             <tr>
                 <td>City/Municipality: </td>
@@ -162,7 +162,7 @@
             </tr>
             <tr>
                 <td>Telephone No.: </td>
-                <td>{{$info[0]->Tel}}></td>
+                <td>{{$info[0]->Tel}}</td>
             </tr>
             <tr>
                 <td>Phone No.: </td>

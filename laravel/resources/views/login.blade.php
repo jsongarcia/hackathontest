@@ -9,13 +9,16 @@
             @if(Session::has("user"))
             <script> window.location.href="/home" </script>
              @endif
-            @if(isset($msg))
-                <p>{{$msg}}</p>
+            @if(isset($error))
+                <p class="msg msg-error">{{$error}}</p>
             @endif
+            @if(isset($notice))
+            <p class="msg msg-notice">{{$notice}}</p>
+        @endif
             <form action="/" method="POST">
             @csrf
-            <input type = "text" name="email" placeholder="Email"><br>
-            <input type = "password" name="password" placeholder="Password"><br>
+            <input type = "email" name="email" placeholder="Email" required><br>
+            <input type = "password" name="password" placeholder="Password" required><br>
             <input type="submit" value="Login" />
             </form>
             <a href="/register">Need an account? <b>Register</b></a>

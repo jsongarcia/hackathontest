@@ -22,14 +22,17 @@ class SessionHandler extends Controller
                 $email = $r->input("email");
                 $pass = $r->input("password");
                 $res = DB::select("select * from faculty where USERNAME=? and PASSWORD=?",[$email, $pass]);
+                
                 if(count($res)==1){ //There's a match!
+                    if($res[0]->ACTIVATED==0)
+                        return view("login", ["notice"=>"Account Inactive. Please contact an administrator."]);
                     //Make a session for the user
                     $sessionKey = md5(time().$email);
                     Session::put("user", $sessionKey);
                     DB::update("update faculty set ACTIVESESSION=? WHERE ID=?",[$sessionKey, $res[0]->ID]);
                     return "<script>window.location.href='/home'</script>";
                 }else{
-                return view("login", ["msg"=>"Invalid Username/Password."]);
+                return view("login", ["error"=>"Invalid Username/Password."]);
                 }
             }else
             return view("login");
@@ -57,7 +60,9 @@ class SessionHandler extends Controller
     public function addUser(Request $req){
         $email = $req->input("email");
         $pas1 = $req->input("pass1");
-        $pas1 = $req->input("pass2");
+        $pas2 = $req->input("pass2");
+        if($pas1!=$pas2)
+            return view("/register", ['error'=>"Passwords do not match!"]);
         //Check for same emails
         $sameEmails = DB::select("select * from faculty WHERE USERNAME=?", [$email]);
         if(count($sameEmails)==0){
@@ -69,11 +74,9 @@ class SessionHandler extends Controller
             DB::statement("insert into EDUCATIONALBACKGROUND(ID) values(?)", [$id[0]->ID]);
             DB::statement("insert into PERSONALINFO(ID) values(?)", [$id[0]->ID]);
             DB::statement("insert into PROFILEPICTURES(ID,DIRECTORY) values(?,?)", [$id[0]->ID, "default-pic.png"]);
-            return view("/register", ['msg'=>"Registered succesfully!"]);
+            return view("/register", ['success'=>"Registered succesfully!"]);
         }else{
-            //Return an error
-            $msg = $email ." is already registered in the database.";
-            return view("/register", ['msg'=>$msg]);
+            return view("/register", ['error'=>"Email is already registered."]);
         }
     }
     public function logout(){
@@ -138,13 +141,13 @@ class SessionHandler extends Controller
         DB::update("
             update PERSONALINFO
             set
-            FName=?, LName=?, MName=?, Birthdate=?, BirthPlace=?, Sex=?, Civil=?, Height=?, Weight=?, BloodType=?,
+            FName=?, LName=?, MName=?, Extension=?, Birthdate=?, BirthPlace=?, Sex=?, Civil=?, Height=?, Weight=?, BloodType=?,
             GSIS=?, PAGIBIG=?, PHILHEALTH=?, SSS=?, TIN=?, Citizen=?, House=?, Street=?, Subd=?, Barangay=?, City=?, Province=?, Zip=?, 
             PermaHouse=?, PermaStreet=?,PermaSubd=?, PermaBarangay=?, PermaCity=?, PermaProvince=?, PermaZip=?, Tel=?, Phone=?, AltEmail=?
 
             WHERE ID=?
             ",
-            [$req->FName, $req->LName, $req->MName, $req->Birthday,$req->BirthPlace, $req->Sex, $req->CivilStatus, $req->Height, $req->Weight, $req->BloodType,
+            [$req->FName, $req->LName, $req->MName,$req->Extension, $req->Birthday,$req->BirthPlace, $req->Sex, $req->CivilStatus, $req->Height, $req->Weight, $req->BloodType,
             $req->GSIS, $req->PAGIBIG, $req->PHILHEALTH, $req->SSS, $req->TIN, $req->Citizenship, $req->House,$req->Street, $req->Subdivision,$req->Barangay, $req->City, $req->Province, $req->Zip,
             $req->PermHouse, $req->PermStreet, $req->PermSubdivision,$req->PermBarangay, $req->PermCity, $req->PermProvince, $req->PermZip, $req->Telephone, $req->Phone, $req->altEmail,
             $userId[0]->ID]);

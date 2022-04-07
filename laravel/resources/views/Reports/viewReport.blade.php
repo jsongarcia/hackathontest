@@ -23,7 +23,7 @@
         </div>
 <div class="report">
     @if(count($perso)>0)
-        <table>
+        <table class="infoTable">
             <caption><b> PERSONAL INFORMATION </b></caption>
             <tr>
                 <td>Email Address:</td>
@@ -35,7 +35,7 @@
             </tr>
             <tr>
                 <td>Employee Name: </td>
-                <td>{{$perso[0]->FName}} {{$perso[0]->MName}}. {{$perso[0]->LName}}</td>
+                <td>{{$perso[0]->FName}} {{$perso[0]->MName}}. {{$perso[0]->LName}} {{$perso[0]->Extension}}</td>
             </tr>
             <tr>
                 <td>Date of Birth: </td>
@@ -175,7 +175,7 @@
 
     @if(count($educ)>0)
     <hr />
-    <table>
+    <table class="infoTable">
         <caption><b>EDUCATIONAL BACKGROUND</b></caption>
             <tr>
                 <td colspan="2">Elementary</td>
@@ -237,11 +237,11 @@
 
     @if(count($voc)>0)
     <hr />
-    <table>
+    <table class="infoTable">
     <caption><b>VOCATIONAL COURSE<b></caption>
     </table>
     @foreach($voc ?? [] as $record)
-        <table>
+        <table class="infoTable">
             <tr>
                 <td>Name of School: </td>
                 <td>{{$record->Name}}</td>
@@ -274,11 +274,11 @@
 
     @if(count($coll)>0)
     <hr />
-    <table>
+    <table class="infoTable">
     <caption><b>COLLEGE COURSE<b></caption>
     </table>
     @foreach($coll ?? [] as $record)
-        <table>
+        <table class="infoTable">
             <tr>
                 <td>Name of School: </td>
                 <td>{{$record->Name}}</td>
@@ -310,11 +310,11 @@
 
     @if(count($grad)>0)
     <hr />
-    <table>
+    <table class="infoTable">
     <caption><b>GRADUATE STUDY COURSE</b></caption>
     </table>
     @foreach($grad ?? [] as $record)
-        <table>
+        <table class="infoTable">
             
             <tr>
                 <td>Name of School: </td>
@@ -346,11 +346,11 @@
 
     @if(count($civil)>0)
     <hr />
-    <table>
+    <table class="infoTable">
     <caption><b>CIVIL SERVICE</b></caption>
     </table>
     @foreach($civil ?? [] as $record)
-        <table>
+        <table class="infoTable">
             <tr>
                 <td>Civil Service Type: </td>
                 <td>{{$record->Service}}</td>
@@ -384,11 +384,11 @@
 
     @if(count($work)>0)
     <hr />
-    <table>
+    <table class="infoTable">
     <caption><b>WORK EXPERIENCE</b></caption>
     </table>
     @foreach($work as $record)
-        <table>
+        <table class="infoTable">
             <tr>
                 <td>Inclusive Dates: </td>
                 <td>{{date_create($record->FromDate)->format('m/d/Y')}} - {{date_create($record->ToDate)->format('m/d/Y')}}</td>
@@ -431,11 +431,11 @@
 
     @if(count($cert)>0)
     <hr />
-    <table>
+    <table class="infoTable">
     <caption><b>CERTIFICATES</b></caption>
     </table>
     @foreach($cert ?? [] as $record)
-        <table>
+        <table class="infoTable">
             <tr>
                 <td>Title: </td>
                 <td>{{$record->Title}}</td>
@@ -461,7 +461,7 @@
                 <td>{{$record->LDType}}</td>
             </tr>
             <tr>
-                <td colspan='2'><iframe src="/certificates/{{$record->Certificate}}"></iframe></td>
+                <td colspan='2'><center><iframe src="/certificates/{{$record->Certificate}}"></iframe></center></td>
             </tr>
         </table><br />
         @endforeach

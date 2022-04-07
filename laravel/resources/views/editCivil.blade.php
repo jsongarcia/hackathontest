@@ -3,7 +3,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=1, initial-scale=1.0">
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="/css/main.css">
     <title>Document</title>
 </head>
 <body>
@@ -29,19 +29,19 @@
             @csrf
             <tr>
                 <td>Civil Service Type: </td>
-                <td><input type="text" name="civil" value="{{$record->Service}}"></td>
+                <td><input type="text" name="civil" value="{{$record->Service}}" required></td>
             </tr>
             <tr>
                 <td>Rating: </td>
-                <td><input type="text" name="rating" value="{{$record->Rating}}"></td>
+                <td><input type="text" name="rating" value="{{$record->Rating}}" required></td>
             </tr>
             <tr>
                 <td>Date of Examination/Conferment: </td>
-                <td><input type="date" name="date" value="{{$record->ExamDate}}"></td>
+                <td><input type="date" name="date" value="{{$record->ExamDate}}" required></td>
             </tr>
             <tr>
                 <td>Place of Examination/Confement: </td>
-                <td><input type="text" name="place" value="{{$record->ExamPlace}}"></td>
+                <td><input type="text" name="place" value="{{$record->ExamPlace}}" required></td>
             </tr>
             <tr>
                 <td>License (if applicable):  </td>
@@ -60,7 +60,6 @@
         </form>
         @endforeach
         <br /><br />
-        <button><a href="/civil/addEntry">Add Civil Service</a></button>
 </div>
 </body>
 </html>

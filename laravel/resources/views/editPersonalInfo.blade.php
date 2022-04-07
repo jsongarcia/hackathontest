@@ -28,7 +28,7 @@
                 else
                 src="profilepictures/default-pic.png"
             @endif
-            width=200px height=200px>
+            width=200px height=200px><br />
             <input type="file" accept="image/*" name="profile">
         <table>
                 @csrf
@@ -50,7 +50,7 @@
                 @if(isset($info))
                     value="{{$info[0]->FName}}"
                 @endif
-                ></td>
+                required></td>
             </tr>
             <tr>
                 <td>Last Name: </td>
@@ -58,7 +58,7 @@
                 @if(isset($info))
                     value="{{$info[0]->LName}}"
                 @endif
-                ></td>
+                required></td>
             </tr>
             <tr>
                 <td>Middle Initial: </td>
@@ -69,12 +69,20 @@
                 ></td>
             </tr>
             <tr>
+                <td>Name Extension: </td>
+                <td><input type="text" name="Extension"
+                @if(isset($info))
+                    value="{{$info[0]->Extension}}"
+                @endif
+                ></td>
+            </tr>
+            <tr>
                 <td>Date of Birth: </td>
                 <td><input type="date" name="Birthday"
                 @if(isset($info))
                     value="{{$info[0]->Birthdate}}"
                 @endif
-                ></td>
+                 required></td>
             </tr>
             <tr>
                 <td>Age: </td>
@@ -90,7 +98,7 @@
                 @if(isset($info))
                     value="{{$info[0]->BirthPlace}}"
                 @endif
-                ></td>
+                required></td>
             </tr>
             <tr>
                 <td>Sex: </td>
@@ -98,7 +106,7 @@
                 @if(isset($info))
                     value="{{$info[0]->Sex}}"
                 @endif
-                ></td>
+                required></td>
             </tr>
             <tr>
                 <td>Civil Status: </td>
@@ -106,7 +114,7 @@
                 @if(isset($info))
                     value="{{$info[0]->Civil}}"
                 @endif
-                ></td>
+                required></td>
             </tr>
             <tr>
                 <td>Height: </td>
@@ -213,7 +221,7 @@
                 @if(isset($info))
                     value="{{$info[0]->Barangay}}"
                 @endif
-                ></td>
+                required></td>
             </tr>
             <tr>
                 <td>City/Municipality: </td>
@@ -221,7 +229,7 @@
                 @if(isset($info))
                     value="{{$info[0]->City}}"
                 @endif
-                ></td>
+                required></td>
             </tr>
             <tr>
                 <td>Province: </td>
@@ -229,7 +237,7 @@
                 @if(isset($info))
                     value="{{$info[0]->Province}}"
                 @endif
-                ></td>
+                required></td>
             </tr>
             <tr>
                 <td>Zip Code: </td>
@@ -237,7 +245,7 @@
                 @if(isset($info))
                     value="{{$info[0]->Zip}}"
                 @endif
-                ></td>
+                required></td>
             </tr>
             <tr>
                 <td colspan="2">Permanent Address</td>
@@ -272,7 +280,7 @@
                 @if(isset($info))
                     value="{{$info[0]->PermaBarangay}}"
                 @endif
-                ></td>
+                required></td>
             </tr>
             <tr>
                 <td>City/Municipality: </td>
@@ -280,7 +288,7 @@
                 @if(isset($info))
                     value="{{$info[0]->PermaCity}}"
                 @endif
-                ></td>
+                required></td>
             </tr>
             <tr>
                 <td>Province: </td>
@@ -288,7 +296,7 @@
                 @if(isset($info))
                     value="{{$info[0]->PermaProvince}}"
                 @endif
-                ></td>
+                required></td>
             </tr>
             <tr>
                 <td>Zip Code: </td>
@@ -296,7 +304,7 @@
                 @if(isset($info))
                     value="{{$info[0]->PermaZip}}"
                 @endif
-                ></td>
+                required></td>
             </tr>
             <tr>
                 <td>Telephone No.: </td>
@@ -312,7 +320,7 @@
                 @if(isset($info))
                     value="{{$info[0]->Phone}}"
                 @endif
-                ></td>
+                required></td>
             </tr>
             <tr>
                 <td>Alternate Email Address: </td>
